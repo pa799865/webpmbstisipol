@@ -73,24 +73,33 @@
 
                     <div class="col-12">
                       <p>Edit Hero Title</p>
-                      <input type="text" name="HomeHeroTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
+                      <input type="text" value="{{ $heroes[0]->content }}" name="HomeHeroTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Hero Description</p>
-                      <input type="text" class="form-control" name="homeHeroDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
+                      <input type="text" value="{{ $heroes[1]->content }}" class="form-control" name="homeHeroDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
                     </div>
-
+                   @foreach ($stats as $stat)  
+                   <div class="col-12 ">
+                     <p>Edit Hero Stat Number</p>
+                     <input type="text" value="{{ $stat->number }}" class="form-control" name="homeHeroStatNumber" placeholder="2200+" required="">
+                   </div>
+                   <div class="col-12 ">
+                     <input type="text" value="{{ $stat->label }}" class="form-control" name="homeHeroStatLabel" placeholder="Alumni" required="">
+                   </div>
+                   @endforeach
                     <div class="col-12 ">
-                      <p>Edit Hero Stat Number</p>
-                      <input type="text" class="form-control" name="homeHeroStatNumber" placeholder="2200+" required="">
+                      <p>Edit Hero Floating Card1 </p>
+                      <input type="text" value="{{ $heroes[2]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeHeroStatLabel" placeholder="Alumni" required="">
+                      <p>Edit Hero Floating Card2 </p>
+                      <input type="text" value="{{ $heroes[3]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <p>Edit Hero Floating Card </p>
-                      <input type="text" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
+                      <p>Edit Hero Floating Card3 </p>
+                      <input type="text" value="{{ $heroes[4]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
                     </div>
 
                     <div class="col-12 text-center">

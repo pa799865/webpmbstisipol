@@ -70,36 +70,53 @@
                 <form action="{{ route('postLogin') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
                   @csrf
                   <div class="row gy-4">
-
                     <div class="col-12">
-                      <p>Edit Pricing Title Description</p>
-                      <input type="text" name="HomePricingTitleDescription" class="form-control" placeholder="Biaya Kuliah Per Semester" required="">
+                      <p>Edit Pricing Card Title</p>
+                      <input type="text" value="{{ $pricings[0]->content }}" class="form-control" name="homePricingShadow" placeholder="Semester Ganjil" required="">
                     </div>
-
                     <div class="col-12 ">
-                      <p>Edit Pricing Title</p>
-                      <input type="text" class="form-control" name="homePricingTitle" placeholder="Biaya Kuliah Per Semester" required="">
+                      <input type="text" value="{{ $pricings[1]->content }}" class="form-control" name="homePricingTitle" placeholder="Semester Ganjil" required="">
                     </div>
-
                     <div class="col-12 ">
-                      <p>Edit Pricing Description</p>
-                      <input type="text" class="form-control" name="homePricingDescription" placeholder="Biaya kuliah sesuai dengan kelas - kelas yang diselenggarakan pada Tahun Akademik 2025/2026" required="">
+                      <p>Edit Pricing Card Description</p>
+                      <input type="text" value="{{ $pricings[2]->content }}" class="form-control" name="homePricingDescription" placeholder="Semester Ganjil" required="">
                     </div>
+                    @foreach ($pricingcards as $pricingcard)  
                     <div class="col-12 ">
                       <p>Edit Pricing Card</p>
-                      <input type="text" class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
+                      <input type="text" value="{{ $pricingcard->badge }}" class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
+                      <input type="text" value="{{ $pricingcard->title }}" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingCardPrice" placeholder="3.453" required="">
+                      <input type="text" value="{{ $pricingcard->description }}" class="form-control" name="homePricingCardDescription" placeholder="3.453" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingPeriod" placeholder="/Semester" required="">
+                      <input type="text" value="{{ $pricingcard->price }}" class="form-control" name="homePricingCardPrice" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingFeaturedList" placeholder="SPP" required="">
+                      <input type="text" value="{{ $pricingcard->period }}" class="form-control" name="homePricingCardPeriod" placeholder="/Semester" required="">
+                    </div>
+                    <div class="col-12 ">
+                      <label for="">
+                      <input type="checkbox" value="special"  name="homePricingCardTipe" placeholder="/Semester" required="" @if ($pricingcard->tipe === 'special')
+                        checked
+                      @endif> centang jika anda ingin cardnya berwarna berbeda
+                      </label>
+                    </div>
+                    @endforeach
+                    <div class="col-12 ">
+                      <p>Edit Pricing Card Common List</p>
+                      @foreach ($listbiasas as $listbiasa)
+                      <input type="text" value="{{ $listbiasa->content }}" class="form-control" name="homePricingCardFeaturedCommonList" placeholder="SPP" required="">
+                      @endforeach
+                    </div>
+                    <div class="col-12 ">
+                      <p>Edit Pricing Card Special List</p>
+                     @foreach ($listspecials as $listspecial)
+                      <input type="text" value="{{ $listspecial->content }}" class="form-control" name="homePricingCardFeaturedCommonList" placeholder="SPP" required="">
+                      @endforeach
                     </div>
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>

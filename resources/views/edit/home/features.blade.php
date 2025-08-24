@@ -70,43 +70,42 @@
                 <form action="{{ route('postLogin') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
                   @csrf
                   <div class="row gy-4">
-
-                    <div class="col-12">
-                      <p>Edit Features Title</p>
-                      <input type="text" name="HomeFeaturesDescriptionTitle" class="form-control" placeholder="Program Studi" required="">
-                    </div>
-
-                    <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTitle" placeholder="Program Studi" required="">
-                    </div>
-
+                    @foreach ( $programstudyitems as $programstudyitem )
+                      
                     <div class="col-12 ">
                       <p>Edit Features Tab Wrapper</p>
-                      <input type="text" class="form-control" name="homeFeaturesTabWrapperTitle" placeholder="Ilmu Administrasi Publik" required="">
+                      <input type="text" value="{{ $programstudyitem->title }}" class="form-control" name="homeFeaturesTabWrapperTitle" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTabWrapperDescription" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">
+                      <input type="text" value="{{ $programstudyitem->description }}" class="form-control" name="homeFeaturesTabWrapperDescription" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">
+                    </div>
+                    @endforeach
+                    @foreach ( $programstudycontents as $programstudycontent )
+                      
+                    <div class="col-12 ">
+                      <p>Edit Features Tab Content</p>
+                      <input type="text" value="{{ $programstudycontent->title }}" class="form-control" name="homeFeaturesTabContentTitle" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <p>Edit Features Tab Content1</p>
-                      <input type="text" class="form-control" name="homeFeaturesTabContentTitle" placeholder="Ilmu Administrasi Publik" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTabContentDescription" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang
+                      <input type="text" value="{{ $programstudycontent->description }}" class="form-control" name="homeFeaturesTabContentDescription" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang
                                             dapat dipilih sesuai minat mahasiswa:" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTabContentList" placeholder="Kebijakan Publik (Reguler Pagi)" required="">
+                      <input type="text" value="{{ $programstudycontent->list1 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTabContentList" placeholder="Manajemen Publik (Reguler Karyawan)" required="">
+                      <input type="text" value="{{ $programstudycontent->list2 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeFeaturesTabContentList" placeholder="Administrasi Keuangan dan Perpajakan (Belum Dibuka)" required="">
+                      <input type="text" value="{{ $programstudycontent->list3 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="file" class="form-control" name="homeFeaturesTabContentVisual" placeholder="Administrasi Keuangan dan Perpajakan (Belum Dibuka)" required="">
+                      <input type="text" value="{{ $programstudycontent->list4 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
                     </div>
+                    <div class="col-12 ">
+                      <input type="file" value="{{$programstudycontent->img }}" class="form-control" name="homeFeaturesTabContentVisual" placeholder="Administrasi Keuangan dan Perpajakan (Belum Dibuka)" required="">
+                    </div>
+                    @endforeach
 
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>

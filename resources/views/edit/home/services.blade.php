@@ -73,42 +73,44 @@
 
                     <div class="col-12">
                       <p>Edit Services Description Title</p>
-                      <input type="text" name="HomeServicesDescriptionTitle" class="form-control" placeholder="Keunggulan Kami" required="">
+                      <input type="text" value="{{ $services[0]->content }}" name="HomeServicesDescriptionTitle" class="form-control" placeholder="Keunggulan Kami" required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Services Title</p>
-                      <input type="text" class="form-control" name="homeServicestitle" placeholder="Keunggulan Kami" required="">
+                      <input type="text" value="{{ $services[1]->content }}" class="form-control" name="homeServicestitle" placeholder="Keunggulan Kami" required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Services Section Badge</p>
-                      <input type="text" class="form-control" name="homeServicesSectionBadge" placeholder="Tentang Kami" required="">
+                      <input type="text" value="{{ $services[2]->content }}" class="form-control" name="homeServicesSectionBadge" placeholder="Tentang Kami" required="">
                     </div>
                     <div class="col-12 ">
                       <p>Edit Services Section Heading </p>
-                      <input type="text" class="form-control" name="homeServicesSectionHeading" placeholder="Keunggulan Kami" required="">
+                      <input type="text" value="{{ $services[3]->content }}" class="form-control" name="homeServicesSectionHeading" placeholder="Keunggulan Kami" required="">
                     </div>
                     <div class="col-12 ">
                       <p>Edit Services Section Description</p>
-                      <input type="text" class="form-control" name="homeServicesSectionDescription" placeholder="Kampus STISIPOL Raja Haji Tanjungpinang di lokasi
+                      <input type="text" value="{{ $services[4]->content }}" class="form-control" name="homeServicesSectionDescription" placeholder="Kampus STISIPOL Raja Haji Tanjungpinang di lokasi
                                 strategi serta Berkualitas, Biaya Terjangkau, Beasiswa Tersedia, Inovatif & Berorientasi
                                 Sosial." required="">
                     </div>
                     <div class="col-12 ">
                       <p>Edit Services Visual</p>
-                      <input type="file" class="form-control" name="homeHeroStatLabel2" placeholder="Mahasiswa Aktif" required="">
+                      <input type="file" value="../assets/img/services/{{ $services[5]->content }}" class="form-control" name="homeHeroStatLabel2" placeholder="Mahasiswa Aktif" required="">
                     </div>
+                    @foreach ( $servicescards as $servicescard )
                     <div class="col-12 ">
                       <p>Edit Service Card Content</p>
-                      <input type="text" class="form-control" name="homeServicesCardContentTitle" placeholder="Biaya Terjangkau" required="">
+                      <input type="text" value="{{ $servicescard->title }}" class="form-control" name="homeServicesCardContentTitle" placeholder="Biaya Terjangkau" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homeServicesCardContentDescription" placeholder="Kuliah di STISIPOL Raja Haji Tanjungpinang, biaya
+                      <input type="text" value="{{ $servicescard->description }}" class="form-control" name="homeServicesCardContentDescription" placeholder="Kuliah di STISIPOL Raja Haji Tanjungpinang, biaya
                                         terjangkau, kualitas terjaga!!! Solusi Pendidikan berkualitas tanpa beban
                                         financial." required="">
                     </div>
-
+                    @endforeach
+                    
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>
                       <div class="error-message"></div>

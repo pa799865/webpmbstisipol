@@ -268,8 +268,8 @@
 
                     <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right" data-aos-delay="200">
                         <div class="hero-content">
-                            <h1 class="hero-title" style="font-weight: 600;">Penerimaan Mahasiswa Baru 2025/2026</h1>
-                            <p class="hero-description">STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran.</p>
+                            <h1 class="hero-title" style="font-weight: 600;">{{ $heroes[0]->content }}</h1>
+                            <p class="hero-description">{{ $heroes[1]->content }}</p>
                             <div class="hero-actions">
                                 <a href="#about" class="btn-primary">Daftar Sekarang</a>
                                 <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn-secondary glightbox">
@@ -278,22 +278,12 @@
                                 </a>
                             </div>
                             <div class="hero-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number">2200+</span>
-                                    <span class="stat-label">Alumni</span>
+                                @foreach ($stats as $stat)
+                                    <div class="stat-item">
+                                    <span class="stat-number">{{ $stat->number }}</span>
+                                    <span class="stat-label">{{ $stat->label }}</span>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">1200+</span>
-                                    <span class="stat-label">Mahasiswa Aktif</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">40+</span>
-                                    <span class="stat-label">Dosen S2 & S3</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">30+</span>
-                                    <span class="stat-label">Kerjasama</span>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -306,21 +296,21 @@
                                 <div class="floating-elements">
                                     <div class="floating-card card-1">
                                         <i class="bi bi-lightbulb"></i>
-                                        <span>Administrasi Publik</span>
+                                        <span>{{ $heroes[2]->content }}</span>
                                     </div>
                                     <div class="floating-card card-2">
                                         <i class="bi bi-award"></i>
-                                        <span>Ilmu Pemerintahan</span>
+                                        <span>{{ $heroes[3]->content }}</span>
                                     </div>
                                     <div class="floating-card card-3">
                                         <i class="bi bi-people"></i>
-                                        <span>Sosiologi</span>
+                                        <span>{{ $heroes[4]->content }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        
+
                 </div>
 
             </div>
@@ -331,9 +321,10 @@
         <section id="services" class="services section">
 
             <!-- Section Title -->
+            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <span class="description-title">Keunggulan Kami</span>
-                <h2>Keunggulan Kami</h2>
+                <span class="description-title">{{ $services[0]->content }}</span>
+                <h2>{{ $services[1]->content }}</h2>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -343,12 +334,10 @@
                         <div class="intro-content" data-aos="fade-right" data-aos-delay="100">
                             <div class="section-badge mb-3" data-aos="zoom-in" data-aos-delay="50">
                                 <i class="bi bi-star-fill"></i>
-                                <span>Tentang Kami</span>
+                                <span>{{ $services[2]->content }}</span>
                             </div>
-                            <h2 class="section-heading mb-4">Keunggulan Kami</h2>
-                            <p class="section-description mb-4">Kampus STISIPOL Raja Haji Tanjungpinang di lokasi
-                                strategi serta Berkualitas, Biaya Terjangkau, Beasiswa Tersedia, Inovatif & Berorientasi
-                                Sosial.</p>
+                            <h2 class="section-heading mb-4">{{ $services[3]->content }}</h2>
+                            <p class="section-description mb-4">{{ $services[4]->content }}</p>
                             <a href="#" class="btn-primary">
                                 Lebih lanjut
                             </a>
@@ -356,77 +345,33 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="hero-visual" data-aos="fade-left" data-aos-delay="150">
-                            <img src="assets/img/services/services-1.webp" alt="Services" class="img-fluid">
+                            <img src="assets/img/services/{{ $services[5]->content }}" alt="Services" class="img-fluid">
                         </div>
                     </div>
                 </div>
 
                 <div class="services-grid mt-5 ">
                     <div class="row g-4">
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        @foreach ($servicescards as $servicecard)
+                            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                             <div class="service-card">
                                 <div class="card-number">
                                     <span><i class="bi bi-tv"></i></span>
                                 </div>
                                 <div class="card-content">
                                     <h5 class="service-title">
-                                        <a href="#">Innovation & Creativity Campus</a>
+                                        <a href="#">{{ $servicecard->title }}</a>
                                     </h5>
-                                    <p class="service-description">Eksplorasi, Kolaborasi, Riset dan Adaptasi Teknologi.
+                                    <p class="service-description">{{ $servicecard->description }}
                                     </p>
                                 </div>
                             </div>
                         </div><!-- End Service Card -->
-
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="service-card">
-                                <div class="card-number">
-                                    <span><i class="bi bi-cash"></i></span>
-                                </div>
-                                <div class="card-content">
-                                    <h5 class="service-title">
-                                        <a href="#">Biaya Terjangkau</a>
-                                    </h5>
-                                    <p class="service-description">Kuliah di STISIPOL Raja Haji Tanjungpinang, biaya
-                                        terjangkau, kualitas terjaga!!! Solusi Pendidikan berkualitas tanpa beban
-                                        financial.</p>
-                                </div>
-                            </div>
-                        </div><!-- End Service Card -->
-
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="service-card">
-                                <div class="card-number">
-                                    <span><i class="bi bi-mortarboard" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="card-content">
-                                    <h5 class="service-title">
-                                        <a href="#">Tersedia Beasiswa</a>
-                                    </h5>
-                                    <p class="service-description">Beasiswa Tersedia, Mimpi jadi Nyata, STISIPOL Raja
-                                        Haji Tanjungpinang dukung Pendidikan Tanpa Hambatan.</p>
-                                </div>
-                            </div>
-                        </div><!-- End Service Card -->
-
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-card">
-                                <div class="card-number">
-                                    <span><i class="bi bi-people"></i></span>
-                                </div>
-                                <div class="card-content">
-                                    <h5 class="service-title">
-                                        <a href="#">Sosiopreneurship</a>
-                                    </h5>
-                                    <p class="service-description">Melalui Integrasi, Kolaborasi dan Pemanfaatan
-                                        Teknologi Digital dan Media Digital.</p>
-                                </div>
-                            </div>
-                        </div><!-- End Service Card -->
+                        @endforeach
 
                     </div>
                 </div>
-                 
+
             </div>
             <a href="{{route('editHomeServices')}}" class="btn-primary">Edit Konten</a>
         </section><!-- /Services Section -->
@@ -444,47 +389,24 @@
 
                 <div class="tabs-wrapper">
                     <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
-
+                        @foreach ($programstudyitems as $programstudyitem)                            
                         <li class="nav-item">
-                            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-{{ $programstudyitem->tab }}">
                                 <div class="tab-icon">
                                     <i class="bi bi-rocket-takeoff"></i>
                                 </div>
                                 <div class="tab-content">
-                                    <h5>Ilmu Administrasi Publik</h5>
-                                    <span>Lorem ipsum, dolor sit amet consectetur</span>
+                                    <h5>{{ $programstudyitem->title }}</h5>
+                                    <span>{{ $programstudyitem->description }}</span>
                                 </div>
                             </a>
                         </li><!-- End tab nav item -->
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
-                                <div class="tab-icon">
-                                    <i class="bi bi-shield-shaded"></i>
-                                </div>
-                                <div class="tab-content">
-                                    <h5>Ilmu Pemerintahan</h5>
-                                    <span>Lorem ipsum, dolor sit amet consectetur</span>
-                                </div>
-                            </a>
-                        </li><!-- End tab nav item -->
-
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
-                                <div class="tab-icon">
-                                    <i class="bi bi-lightning-charge"></i>
-                                </div>
-                                <div class="tab-content">
-                                    <h5>Sosiologi</h5>
-                                    <span>Lorem ipsum, dolor sit amet consectetur</span>
-                                </div>
-                            </a>
-                        </li><!-- End tab nav item -->
+                        @endforeach
                     </ul>
 
                     <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-
-                        <div class="tab-pane fade active show" id="features-tab-1">
+                        @foreach ($programstudycontents as $programstudycontent)                           
+                        <div class="tab-pane" id="features-tab-{{ $programstudycontent->tab }}">
                             <div class="row align-items-center">
 
                                 <div class="col-lg-5">
@@ -492,22 +414,42 @@
                                         <div class="icon-badge">
                                             <i class="bi bi-rocket-takeoff"></i>
                                         </div>
-                                        <h3>Ilmu Administrasi Publik</h3>
-                                        <p>Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang
-                                            dapat dipilih sesuai minat mahasiswa:</p>
+                                        <h3>{{ $programstudycontent->title }}</h3>
+                                        <p>{{ $programstudycontent->description }}</p>
 
                                         <div class="feature-grid">
                                             <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Kebijakan Publik (Reguler Pagi)</span>
+                                                @if ($programstudycontent->list1 === null)
+                                                    <i></i>
+                                                    @else
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                @endif
+                                                <span>{{ $programstudycontent->list1 }}</span>
                                             </div>
                                             <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Manajemen Publik (Reguler Karyawan)</span>
+                                                @if ($programstudycontent->list2 === null)
+                                                    <i></i>
+                                                    @else
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                @endif
+                                                <span>{{ $programstudycontent->list2 }}</span>
                                             </div>
                                             <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Administrasi Keuangan dan Perpajakan (Belum Dibuka)</span>
+                                                @if ($programstudycontent->list3 === null)
+                                                    <i></i>
+                                                    @else
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                @endif
+
+                                                <span>{{ $programstudycontent->list3 }}</span>
+                                            </div>
+                                            <div class="feature-item">
+                                                @if ($programstudycontent->list4 === null)
+                                                    <i></i>
+                                                @else
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                @endif                                                
+                                                <span>{{ $programstudycontent->list4 }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -516,102 +458,14 @@
                                 <div class="col-lg-7">
                                     <div class="visual-content">
                                         <div class="main-image">
-                                            <img src="assets/img/features/features-4.webp" alt="" class="img-fluid">
+                                            <img src="assets/img/features/{{ $programstudycontent->img }}" alt="" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div><!-- End tab content item -->
-
-                        <div class="tab-pane fade" id="features-tab-2">
-                            <div class="row align-items-center">
-
-                                <div class="col-lg-5">
-                                    <div class="content-wrapper">
-                                        <div class="icon-badge">
-                                            <i class="bi bi-shield-shaded"></i>
-                                        </div>
-                                        <h3>Ilmu Pemerintahan</h3>
-                                        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur
-                                            adipisci velit sed quia non numquam eius modi tempora incidunt ut labore.
-                                        </p>
-
-                                        <div class="feature-grid">
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Temporibus autem quibusdam et aut officiis</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Nam libero tempore cum soluta nobis</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Itaque earum rerum hic tenetur a sapiente</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Quis autem vel eum iure reprehenderit qui</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-7">
-                                    <div class="visual-content">
-                                        <div class="main-image">
-                                            <img src="assets/img/features/features-2.webp" alt="" class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- End tab content item -->
-
-                        <div class="tab-pane fade" id="features-tab-3">
-                            <div class="row align-items-center">
-
-                                <div class="col-lg-5">
-                                    <div class="content-wrapper">
-                                        <div class="icon-badge">
-                                            <i class="bi bi-lightning-charge"></i>
-                                        </div>
-                                        <h3>Sosiologi</h3>
-                                        <p>Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit
-                                            laboriosam nisi ut aliquid ex ea commodi consequatur quis autem vel.</p>
-
-                                        <div class="feature-grid">
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Duis aute irure dolor in reprehenderit in voluptate</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Excepteur sint occaecat cupidatat non proident</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Sunt in culpa qui officia deserunt mollit</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <span>Sed ut perspiciatis unde omnis iste natus</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-7">
-                                    <div class="visual-content">
-                                        <div class="main-image">
-                                            <img src="assets/img/features/features-6.webp" alt="" class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- End tab content item -->
+                        @endforeach
                     </div>
                 </div>
 
@@ -635,64 +489,22 @@
 
                 <div class="stats-grid">
                     <div class="row g-4">
-                        <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            @foreach ($stats as $stat)
+                                <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
                             <div class="stat-item">
                                 <div class="stat-icon">
                                     <i class="bi bi-people-fill"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-number">
-                                        <span data-purecounter-start="0" data-purecounter-end="2200"
+                                        <span data-purecounter-start="0" data-purecounter-end="{{ $stat->number }}"
                                             data-purecounter-duration="2" class="purecounter"></span>+
                                     </div>
-                                    <div class="stat-label">Alumni</div>
+                                    <div class="stat-label">{{ $stat->label }}</div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="bi bi-award-fill"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number">
-                                        <span data-purecounter-start="0" data-purecounter-end="1200"
-                                            data-purecounter-duration="2" class="purecounter"></span>+
-                                    </div>
-                                    <div class="stat-label">Mahasiswa Aktif</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="bi bi-award-fill"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number">
-                                        <span data-purecounter-start="0" data-purecounter-end="40"
-                                            data-purecounter-duration="2" class="purecounter"></span>+
-                                    </div>
-                                    <div class="stat-label">Dosen</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="bi bi-globe"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number">
-                                        <span data-purecounter-start="0" data-purecounter-end="30"
-                                            data-purecounter-duration="2" class="purecounter"></span>+
-                                    </div>
-                                    <div class="stat-label">Kerjasama</div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -706,9 +518,9 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <span class="description-title">Biaya Kuliah Per Semester</span>
-                <h2>Biaya Kuliah Per Semester</h2>
-                <p>Biaya kuliah sesuai dengan kelas - kelas yang diselenggarakan pada Tahun Akademik 2025/2026</p>
+                <span class="description-title">{{ $pricings[0]->content }}</span>
+                <h2>{{ $pricings[1]->content }}</h2>
+                <p>{{ $pricings[2]->content }}</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -716,189 +528,44 @@
                 <div class="pricing-toggle-container mb-5" data-aos="zoom-in" data-aos-delay="150"></div>
 
                 <div class="row gy-4">
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                        <article class="price-card h-100">
-                            <div class="card-head">
-                                <span class="badge-title">Semester Ganjil</span>
-                                <h3 class="title">Kelas Reguler</h3>
-                                <p class="subtitle">Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.
-                                </p>
-                                <div class="price-wrap">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.453 <span>K</span><span
-                                            class="period">/Semester</span></span>
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                <li><i class="bi bi-check-circle"></i>SPP</li>
-                                <li><i class="bi bi-check-circle"></i>Heregistrasi</li>
-                                <li><i class="bi bi-check-circle"></i>Kemahasiswaan</li>
-                                <li><i class="bi bi-check-circle"></i>Aptisi</li>
-                                <li><i class="bi bi-check-circle"></i>Kesehatan</li>
-                                <li><i class="bi bi-check-circle"></i>Perpustakaan</li>
-                                <li><i class="bi bi-check-circle"></i>Konsultasi Psikologi</li>
-                                <li><i class="bi bi-check-circle"></i>Asuransi</li>
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose w-100">Daftar Sekarang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
-                        <article class="price-card h-100">
+                    @foreach ($pricingcards as $pricingcard)
+                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                        <article class="price-card {{ $pricingcard->special }} h-100">
 
                             <div class="card-head">
-                                <span class="badge-title">Semester Genap</span>
-                                <h3 class="title">Kelas Reguler</h3>
-                                <p class="subtitle">Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                <span class="badge-title{{ $pricingcard->special2 }}">Semester Genap</span>
+                                <h3 class="title{{ $pricingcard->special2 }}">Kelas Reguler</h3>
+                                <p class="subtitle{{ $pricingcard->special2 }}">Duis aute irure dolor in reprehenderit in voluptate velit esse
                                     cillum.</p>
-                                <div class="price-wrap">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.353 <span>K</span><span
-                                            class="period">/Semester</span></span>
+                                <div class="price-wrap{{ $pricingcard->special2 }}">
+                                    <span class="price price-monthly"><sup>Rp</sup>3.353 <span>K</span>
+                                    @if ($pricingcard->special5 === 'special')
+                                        <span class="period"></span></span>
+                                    @else
+                                        <span class="period">{{ $pricingcard->period }}</span></span>
+                                    @endif                          
                                 </div>
                             </div>
 
                             <ul class="feature-list list-unstyled mb-4">
-                                <li><i class="bi bi-check-circle"></i>SPP</li>
-                                <li><i class="bi bi-check-circle"></i>Heregistrasi</li>
-                                <li><i class="bi bi-check-circle"></i>Kemahasiswaan</li>
-                                <li><i class="bi bi-check-circle"></i>Aptisi</li>
-                                <li><i class="bi bi-check-circle"></i>Kesehatan</li>
-                                <li><i class="bi bi-check-circle"></i>Perpustakaan</li>
-                                <li><i class="bi bi-check-circle"></i>Konsultasi Psikologi</li>
-                                <li><i class="bi bi-check-circle"></i>Asuransi</li>
+                                @if ($pricingcard->special5 === 'special')
+                                    @foreach ($listspecials as $listspecial)
+                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listspecial->content }}</li>
+                                @endforeach
+                                @else
+                                @foreach ($listbiasas as $listbiasa)
+                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listbiasa->content }}</li>
+                                @endforeach
+                                @endif
+                                
                             </ul>
 
                             <div class="cta">
-                                <a href="#" class="btn btn-choose w-100">Daftar Sekarang</a>
+                                <a href="#" class="btn btn-choose{{ $pricingcard->special2 }} w-100">Daftar Sekarang</a>
                             </div>
                         </article><!-- End Pricing Item -->
                     </div>
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                        <article class="price-card featured h-100">
-                            <div class="card-head">
-                                <span class="badge-title-featured">Sekali Bayar</span>
-                                <h3 class="title-featured">Biaya Daftar Ulang <br> (Kelas Reguler)</h3>
-                                <p class="subtitle-featured">Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                    velit
-                                    esse.</p>
-                                <div class="price-wrap-featured">
-                                    <span class="price price-monthly"><sup>Rp</sup>4.520 <span>K</span></span>
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Pemeliharaan Sarana
-                                </li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>PKKMB</li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Jaket Almamater
-                                </li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Kartu Tanda
-                                    Mahasiswa</li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Public Speaking
-                                </li>
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose-featured w-100">Daftar Ulang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                        <article class="price-card h-100">
-                            <div class="card-head">
-                                <span class="badge-title">Semester Ganjil</span>
-                                <h3 class="title">Kelas Karyawan</h3>
-                                <p class="subtitle">Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.
-                                </p>
-                                <div class="price-wrap">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.853<span
-                                            class="period">/Semester</span></span>
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                <li><i class="bi bi-check-circle"></i>SPP</li>
-                                <li><i class="bi bi-check-circle"></i>Heregistrasi</li>
-                                <li><i class="bi bi-check-circle"></i>Kemahasiswaan</li>
-                                <li><i class="bi bi-check-circle"></i>Aptisi</li>
-                                <li><i class="bi bi-check-circle"></i>Kesehatan</li>
-                                <li><i class="bi bi-check-circle"></i>Perpustakaan</li>
-                                <li><i class="bi bi-check-circle"></i>Konsultasi Psikologi</li>
-                                <li class="muted"><i class="bi bi-check-circle"></i>Asuransi</li>
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose w-100">Daftar Sekarang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
-                        <article class="price-card h-100">
-
-                            <div class="card-head">
-                                <span class="badge-title">Semester Genap</span>
-                                <h3 class="title">Kelas Karyawan</h3>
-                                <p class="subtitle">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum.</p>
-                                <div class="price-wrap">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.853 <span>K</span> <span
-                                            class="period">/Semester</span></span>
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                <li><i class="bi bi-check-circle"></i>SPP</li>
-                                <li><i class="bi bi-check-circle"></i>Heregistrasi</li>
-                                <li><i class="bi bi-check-circle"></i>Kemahasiswaan</li>
-                                <li><i class="bi bi-check-circle"></i>Aptisi</li>
-                                <li><i class="bi bi-check-circle"></i>Kesehatan</li>
-                                <li><i class="bi bi-check-circle"></i>Perpustakaan</li>
-                                <li><i class="bi bi-check-circle"></i>Konsultasi Psikologi</li>
-                                <li class="muted"><i class="bi bi-check-circle"></i>Asuransi</li>
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose w-100">Daftar Sekarang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                        <article class="price-card featured h-100">
-                            <div class="card-head">
-                                <span class="badge-title-featured">Sekali Bayar</span>
-                                <h3 class="title-featured">Biaya Daftar Ulang <br> (Kelas Karyawan)</h3>
-                                <p class="subtitle-featured">Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                    velit
-                                    esse.</p>
-                                <div class="price-wrap-featured">
-                                    <span class="price price-monthly"><sup>Rp</sup>5.045 <span>K</span></span>
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Pemeliharaan Sarana
-                                </li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>PKKMB</li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Jaket Almamater
-                                </li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Kartu Tanda
-                                    Mahasiswa</li>
-                                <li id="feature-li"><i class="bi bi-check-circle" id="feature-i"></i>Public Speaking
-                                </li>
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose-featured w-100">Daftar Ulang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
+                    @endforeach
 
                 </div>
 
@@ -909,36 +576,29 @@
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
+             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="row align-items-lg-center">
                     <div class="col-lg-5 order-lg-2" data-aos="fade-left" data-aos-delay="200">
                         <div class="image-wrapper position-relative">
-                            <img src="assets/img/misc/misc-6.webp" alt="Security Solutions"
+                            <img src="assets/img/misc/{{ $ctas[2]->content }}" alt="Security Solutions"
                                 class="img-fluid main-image">
                         </div>
                     </div>
 
                     <div class="col-lg-6 offset-lg-1 order-lg-1" data-aos="fade-right" data-aos-delay="100">
                         <div class="content-area">
-                            <h2>Tunggu Apa Lagi? Ayo Daftar Sekarang!!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                            <h2>{{ $ctas[0]->content }}</h2>
+                            <p>{{ $ctas[1]->content }}
                             </p>
 
                             <ul class="feature-list">
+                                @foreach ($ctalists as $ctalist)     
                                 <li>
                                     <i class="bi bi-check"></i>
-                                    <span>Streamline operations and enhance productivity</span>
+                                    <span>{{ $ctalist->content }}</span>
                                 </li>
-                                <li>
-                                    <i class="bi bi-check"></i>
-                                    <span>Achieve remarkable cost savings and efficiency gains</span>
-                                </li>
-                                <li>
-                                    <i class="bi bi-check"></i>
-                                    <span>Scale your business resources intelligently</span>
-                                </li>
+                                @endforeach
                             </ul>
 
                             <div class="cta-wrapper">
@@ -961,58 +621,17 @@
                 <div class="row justify-content-center">
 
                     <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-                        <h2><strong>Jalur Pendaftaran Mahasiswa</strong></h2>
+                        <h2><strong>{{ $faqs[0]->title }}</strong></h2>
                         <div class="faq-container">
-
-                            <div class="faq-item faq-active">
-                                <h3>Jalur Reguler</h3>
-                                <div class="faq-content">
-                                    <p>1. Lulusan SMA/SMK/MA atau sederajat. <br>
-                                        2. Mengikuti ujian masuk dan/atau seleksi masuk yang ditetapkan oleh STISIPOL
-                                        Raja Haji.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
+                            @foreach ($faqs->skip(1) as $faq)
                             <div class="faq-item">
-                                <h3>Jalur Prestasi</h3>
+                                <h3>{{$faq->title}}</h3>
                                 <div class="faq-content">
-                                    <p><strong>Prestasi Akademik</strong> <br>
-                                        1. Minimal peringkat 10 besar di sekolah. <br>
-                                        2. Nilai rata-rata minimal 85 pada rapor semester 5 dan 6 <br>
-                                        3. Surat rekomendasi dari Kepala Sekolah. <br>
-                                        4. Sertifikat penghargaan akademik (jika ada). <br>
-                                        <strong>Prestasi Non-Akademik</strong> <br>
-                                        1. Prestasi di seni, olahraga, keorganisasian, atau bidang lain di tingkat
-                                        provinsi, nasional, atau internasional. <br>
-                                        2. Melampirkan sertifikat atau dokumen pendukung. <br>
-                                        3. Mengikuti verifikasi prestasi oleh tim admisi STISIPOL Raja Haji. <br>
-                                    </p>
+                                    <p>{{$faq->description}}</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3>Jalur Rekognisi Pembelajaran Lampau (RPL)</h3>
-                                <div class="faq-content">
-                                    <p>1. Memiliki pengalaman kerja, pelatihan, atau pendidikan yang relevan. <br>
-                                        2. Mengikuti evaluasi portofolio, wawancara, dan/atau asesmen.
-                                    </p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3>Jalur Kerjasama</h3>
-                                <div class="faq-content">
-                                    <p>
-                                        1. Berstatus pegawai/karyawan di instansi/lembaga/organisasi mitra STISIPOL Raja <br>
-                                        Haji.
-                                        2. Memenuhi persyaratan seleksi yang ditentukan dalam perjanjian kerjasama.
-                                    </p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                            @endforeach
 
 
                         </div>

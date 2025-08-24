@@ -73,18 +73,19 @@
 
                     <div class="col-12">
                       <p>Edit Faq Title</p>
-                      <input type="text" name="HomeFaqTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
+                      <input type="text" value="{{ $faqs[0]->title }}" name="HomeFaqTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
                     </div>
-
-                    <div class="col-12 ">
+                    @foreach ($faqs->skip(1) as $faq)
+                     <div class="col-12 ">
                       <p>Edit Faq Item</p>
-                      <input type="text" class="form-control" name="homeFaqItem" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
+                      <input type="text" value="{{ $faq->title }}" class="form-control" name="homeFaqItem" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Faq Content</p>
-                      <input type="text" class="form-control" name="homeFaqContent" placeholder="2200+" required="">
+                      <input type="text" value="{{ $faq->description }}" class="form-control" name="homeFaqContent" placeholder="2200+" required="">
                     </div>
+                    @endforeach
 
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>

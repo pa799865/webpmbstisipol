@@ -5,9 +5,7 @@ use App\Http\Controllers\KontenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [AuthController::class,'showIndex'])->name('index');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('login');
 Route::post('/postLogin', [AuthController::class,'login'])->name('postLogin');
 Route::middleware(['auth'])->group(function () {
