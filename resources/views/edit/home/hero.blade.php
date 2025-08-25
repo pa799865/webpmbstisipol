@@ -89,6 +89,11 @@
                      <input type="text" value="{{ $stat->label }}" class="form-control" name="homeHeroStatLabel" placeholder="Alumni" required="">
                    </div>
                    @endforeach
+                   <div class="tambahan"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats"><p>Tambah Stats</p></button>
+                    </div>
+                    
                     <div class="col-12 ">
                       <p>Edit Hero Floating Card1 </p>
                       <input type="text" value="{{ $heroes[2]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
@@ -138,6 +143,25 @@
 
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
+
+  <script>
+                       const tambahStats = document.querySelector(".tambahStats");
+                          tambahStats.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer = document.querySelector(".tambahan");
+                            let tambahanHTML = "";
+                              tambahanHTML += `
+                                    <div class="col-12 ">
+                                    <p>Edit Hero Stat Number</p>
+                                    <input type="text" class="form-control" name="homeHeroStatNumber" placeholder="2200+">
+                                  </div>
+                                  <div class="col-12 ">
+                                    <input type="text" class="form-control" name="homeHeroStatLabel" placeholder="Alumni">
+                                  </div>
+                                  `;
+                               tambahanContainer.innerHTML += tambahanHTML;
+                          });
+                    </script>
 
 </body>
 
