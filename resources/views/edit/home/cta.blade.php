@@ -81,19 +81,24 @@
 
                     <div class="col-12 ">
                       <p>Edit Cta Description</p>
-                      <input type="text" value="{{ $ctas[1]->content }}" class="form-control" name="homeCtaDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
+                      <textarea type="text" class="form-control" name="homeCtaDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Cta Image</p>
                       <input type="file" value="{{ $ctas[2]->content }}" class="form-control" name="homeCtaImg" placeholder="Alumni" required="">
                     </div>
-                    @foreach ($ctalists as $ctalist)      
                     <div class="col-12 ">
                       <p>Edit Cta List</p>
-                      <input type="text" value="{{ $ctalist->content }}" class="form-control" name="homeCtaList" placeholder="2200+" required="">
-                    </div>
+                       </div>
+                    @foreach ($ctalists as $ctalist)      
+                      <input type="text" value="{{ $ctalist->content }}" class="form-control" name="homeCtaList" placeholder="List" required="">
+                      <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
                     @endforeach
+                    <div class="tambahan"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats btn-add" >Tambah List  <i class="bi bi-plus-circle"></i></button>
+                    </div>
 
                                         <div class="col-12 text-center">
                                             <div class="loading">Loading</div>
@@ -132,6 +137,37 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
+
+    <script>
+                       const tambahStats = document.querySelector(".tambahStats");
+                          tambahStats.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer = document.querySelector(".tambahan");
+                            let tambahanHTML = "";
+                              tambahanHTML += `
+                              <div class="stat-item">
+                                    <input type="text" class="form-control" name="homeCtaList" placeholder="List" required="">
+                      <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
+                       </div> `;
+                               tambahanContainer.innerHTML += tambahanHTML;
+                          });
+                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
+                          hapusStatsButtons.forEach(button => {
+                            button.addEventListener("click", (e) => {
+                              e.preventDefault();
+                              let secondDiv = button.parentElement; // div tempat tombol hapus
+    let firstDiv = secondDiv.previousElementSibling; 
+                              if (firstDiv) firstDiv.remove();
+    secondDiv.remove();
+                            });
+                          });
+                          document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats")) {
+    e.preventDefault();
+    e.target.closest(".stat-item").remove();
+  }
+});
+                    </script>
 
 </body>
 

@@ -86,9 +86,14 @@
 
                     <div class="col-12 ">
                       <p>Edit Faq Content</p>
-                      <input type="text" value="{{ $faq->description }}" class="form-control" name="homeFaqContent" placeholder="2200+" required="">
+                      <textarea type="text" class="form-control" name="homeFaqContent" placeholder="2200+" required="">{{ $faq->description }}</textarea>
+                      <button class="hapusStats btn btn-danger ">Hapus</button>
                     </div>
                     @endforeach
+                    <div class="tambahan"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats btn-add" >Tambah Content <i class="bi bi-plus-circle"></i></button>
+                    </div>
 
                                         <div class="col-12 text-center">
                                             <div class="loading">Loading</div>
@@ -127,6 +132,45 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
+
+     <script>
+                       const tambahStats = document.querySelector(".tambahStats");
+                          tambahStats.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer = document.querySelector(".tambahan");
+                            let tambahanHTML = "";
+                              tambahanHTML += `
+                              <div class="stat-item">
+                                   <div class="col-12 ">
+                      <p>Edit Faq Item</p>
+                      <input type="text" class="form-control" name="homeFaqItem" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
+                    </div>
+
+                    <div class="col-12 ">
+                      <p>Edit Faq Content</p>
+                      <textarea type="text" class="form-control" name="homeFaqContent" placeholder="2200+" required=""></textarea>
+                      <button class="hapusStats btn btn-danger ">Hapus</button>
+                    </div> 
+                    </div> `;
+                               tambahanContainer.innerHTML += tambahanHTML;
+                          });
+                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
+                          hapusStatsButtons.forEach(button => {
+                            button.addEventListener("click", (e) => {
+                              e.preventDefault();
+                              let secondDiv = button.parentElement; // div tempat tombol hapus
+    let firstDiv = secondDiv.previousElementSibling; 
+                              if (firstDiv) firstDiv.remove();
+    secondDiv.remove();
+                            });
+                          });
+                          document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats")) {
+    e.preventDefault();
+    e.target.closest(".stat-item").remove();
+  }
+});
+                    </script>
 
 </body>
 

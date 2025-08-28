@@ -79,7 +79,7 @@
                       <input type="text" value="{{ $programstudyitem->title }}" class="form-control" name="homeFeaturesTabWrapperTitle" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudyitem->description }}" class="form-control" name="homeFeaturesTabWrapperDescription" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">
+                      <textarea type="text" class="form-control" name="homeFeaturesTabWrapperDescription" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">{{ $programstudyitem->description }}</textarea>
                     </div>
                     @endforeach
                     @foreach ( $programstudycontents as $programstudycontent )
@@ -88,10 +88,11 @@
                       <p>Edit Features Tab Content</p>
                       <input type="text" value="{{ $programstudycontent->title }}" class="form-control" name="homeFeaturesTabContentTitle" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
+
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudycontent->description }}" class="form-control" name="homeFeaturesTabContentDescription" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang
-                                            dapat dipilih sesuai minat mahasiswa:" required="">
+                      <textarea type="text" class="form-control" name="homeFeaturesTabContentDescription" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang dapat dipilih sesuai minat mahasiswa:" required="">{{ $programstudycontent->description }}</textarea>
                     </div>
+                    <p>List</p>
                     <div class="col-12 ">
                       <input type="text" value="{{ $programstudycontent->list1 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
                     </div>

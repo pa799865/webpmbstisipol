@@ -280,7 +280,7 @@
                             <div class="hero-stats">
                                 @foreach ($stats as $stat)
                                     <div class="stat-item">
-                                    <span class="stat-number">{{ $stat->number }}</span>
+                                    <span class="stat-number">{{ $stat->number }}+</span>
                                     <span class="stat-label">{{ $stat->label }}</span>
                                 </div>
                                 @endforeach

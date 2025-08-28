@@ -83,7 +83,9 @@
                       <p>Edit Pricing Card Description</p>
                       <input type="text" value="{{ $pricings[2]->content }}" class="form-control" name="homePricingDescription" placeholder="Semester Ganjil" required="">
                     </div>
-                    @foreach ($pricingcards as $pricingcard)  
+
+                    @foreach ($pricingcards as $pricingcard) 
+                    <div class="stat-items">
                     <div class="col-12 ">
                       <p>Edit Pricing Card</p>
                       <input type="text" value="{{ $pricingcard->badge }}" class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
@@ -92,7 +94,7 @@
                       <input type="text" value="{{ $pricingcard->title }}" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $pricingcard->description }}" class="form-control" name="homePricingCardDescription" placeholder="3.453" required="">
+                      <textarea type="text"  class="form-control" name="homePricingCardDescription" placeholder="3.453" required="">{{ $pricingcard->description }}</textarea>
                     </div>
                     <div class="col-12 ">
                       <input type="text" value="{{ $pricingcard->price }}" class="form-control" name="homePricingCardPrice" placeholder="/Semester" required="">
@@ -100,25 +102,55 @@
                     <div class="col-12 ">
                       <input type="text" value="{{ $pricingcard->period }}" class="form-control" name="homePricingCardPeriod" placeholder="/Semester" required="">
                     </div>
-                    <div class="col-12 ">
-                      <label for="">
+                    <div class="col-12 d-flex justify-content-between align-items-center ">
+                        <label for="">
                       <input type="checkbox" value="special"  name="homePricingCardTipe" placeholder="/Semester" required="" @if ($pricingcard->tipe === 'special')
                         checked
                       @endif> centang jika anda ingin cardnya berwarna berbeda
-                      </label>
+                      </label>               
+                      
                     </div>
+                    <button type="button" class="hapusStats3 btn btn-danger ">Hapus</button>
+                    </div> 
                     @endforeach
-                    <div class="col-12 ">
-                      <p>Edit Pricing Card Common List</p>
-                      @foreach ($listbiasas as $listbiasa)
-                      <input type="text" value="{{ $listbiasa->content }}" class="form-control" name="homePricingCardFeaturedCommonList" placeholder="SPP" required="">
-                      @endforeach
+                     <div class="tambahan3"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats3 btn-add mt-3" >Tambah Card<i class="bi bi-plus-circle"></i></button>
                     </div>
+
                     <div class="col-12 ">
-                      <p>Edit Pricing Card Special List</p>
-                     @foreach ($listspecials as $listspecial)
-                      <input type="text" value="{{ $listspecial->content }}" class="form-control" name="homePricingCardFeaturedCommonList" placeholder="SPP" required="">
+                      <div class="d-flex justify-content-between mb-2">
+                        <p>Edit Pricing Card Common List</p>
+                      </div>
+
+                      @foreach ($listbiasas as $listbiasa)
+                      <div class="stat-items">
+                      <input type="text" value="{{ $listbiasa->content }}" class="form-control mt-3" name="homePricingCardFeaturedCommonList" placeholder="List Common" required="">
+                      <button class="hapusStats1 btn btn-danger ">Hapus</button>
+                      </div>
                       @endforeach
+                      <div class="tambahan1"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats1 btn-add mt-3" >Tambah List Common<i class="bi bi-plus-circle"></i></button>
+                    </div>
+
+                    </div>
+                    
+                    <div class="col-12 ">
+                      <div class="d-flex justify-content-between mb-2">
+                        <p>Edit Pricing Card Special List</p>  
+                      </div>
+
+                     @foreach ($listspecials as $listspecial)
+                     <div class="stat-items">
+                      <input type="text" value="{{ $listspecial->content }}" class="form-control mt-3" name="homePricingCardFeaturedSpesialList" placeholder="List Spesial" required="">
+                      <button class="hapusStats2 btn btn-danger ">Hapus</button>
+                      </div>
+                      @endforeach
+                      <div class="tambahan2"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats2 btn-add mt-3" >Tambah List Spesial<i class="bi bi-plus-circle"></i></button>
+                    </div>
                     </div>
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>
@@ -156,6 +188,122 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
+
+    <script>
+                       const tambahStats1 = document.querySelector(".tambahStats1");
+                          tambahStats1.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer1 = document.querySelector(".tambahan1");
+                            let tambahanHTML1 = "";
+                              tambahanHTML1 += ` <div class="stat-items">
+                                    <input type="text" class="form-control mt-3" name="homePricingCardFeaturedCommonList" placeholder="List Common" required="">
+                      <button class="hapusStats1 btn btn-danger ">Hapus</button>
+                       </div> 
+                       `;
+                               tambahanContainer1.innerHTML += tambahanHTML1;
+                          });
+                          </script>
+                        <script>
+
+                       const tambahStats2 = document.querySelector(".tambahStats2");
+                          tambahStats2.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer2 = document.querySelector(".tambahan2");
+                            let tambahanHTML2 = "";
+                              tambahanHTML2 += `
+                              <div class="stat-items">
+                                   <input type="text" class="form-control mt-3" name="homePricingCardFeaturedSpesialList" placeholder="List Spesial" required="">
+                      <button class="hapusStats2 btn btn-danger ">Hapus</button>
+                       </div> `;
+                               tambahanContainer2.innerHTML += tambahanHTML2;
+                          });
+                          </script>
+                        <script>
+                          const tambahStats3 = document.querySelector(".tambahStats3");
+                          tambahStats3.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer3 = document.querySelector(".tambahan3");
+                            let tambahanHTML3 = "";
+                              tambahanHTML3 += `
+                              <div class="stat-items"> 
+                              <div class="col-12 ">
+                      <p>Edit Pricing Card</p>
+                      <input type="text"class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
+                    </div>
+                    <div class="col-12 ">
+                      <input type="text" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
+                    </div>
+                    <div class="col-12 ">
+                      <textarea type="text"  class="form-control" name="homePricingCardDescription" placeholder="3.453" required=""></textarea>
+                    </div>
+                    <div class="col-12 ">
+                      <input type="text" class="form-control" name="homePricingCardPrice" placeholder="/Semester" required="">
+                    </div>
+                    <div class="col-12 ">
+                      <input type="text" class="form-control" name="homePricingCardPeriod" placeholder="/Semester" required="">
+                    </div>
+                    <div class="col-12 d-flex justify-content-between align-items-center ">
+                        <label for="">
+                      <input type="checkbox"  name="homePricingCardTipe" placeholder="/Semester" required="" @if ($pricingcard->tipe === 'special')
+                        checked
+                      @endif> centang jika anda ingin cardnya berwarna berbeda
+                      </label>               
+                    </div>
+                    <button type="button" class="hapusStats3 btn btn-danger ">Hapus</button> 
+                    </div>
+                       `;
+                               tambahanContainer3.innerHTML += tambahanHTML3;
+                          });
+
+                          // const hapusStatsButtons3 = document.querySelectorAll(".hapusStats3");
+                          // hapusStatsButtons3.forEach(button => {
+                          //   button.addEventListener("click", (e) => {
+                          //     e.preventDefault();
+                          //     e.target.closest(".stat-item").remove();
+                          //   });
+                          // });
+//                           document.addEventListener("click", function(e) {
+//   if (e.target.classList.contains("hapusStats3")) {
+//     e.preventDefault();
+//     e.target.closest(".stat-items").remove();
+//   }
+// });
+
+                    </script>
+                    <script>
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats3")) {
+    e.preventDefault();
+    const wrapper = e.target.closest(".stat-items");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+});
+</script>
+                    <script>
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats1")) {
+    e.preventDefault();
+    const wrapper = e.target.closest(".stat-items");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+});
+</script>
+                    <script>
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats2")) {
+    e.preventDefault();
+    const wrapper = e.target.closest(".stat-items");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+});
+</script>
+
 
 </body>
 

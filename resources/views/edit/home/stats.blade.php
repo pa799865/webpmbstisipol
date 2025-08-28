@@ -85,15 +85,23 @@
                             Raja Haji Tanjungpinang." required="">
                     </div>
                     @foreach ( $stats as $stat)
-                      
+                    <div class="stat-item">
+                      <input type="hidden" name="stats[{{ $loop->index }}][id]" value="{{ $stat->id }}">
                     <div class="col-12 ">
                       <p>Edit Stats Stat Number</p>
-                      <input type="text" value="{{ $stat->number }}" class="form-control" name="homeStatsStatNumber" placeholder="0000+" required="">
+                      <input type="text" value="{{ $stat->number }}" class="form-control" name="stats[{{ $loop->index }}][number]" placeholder="0000+" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $stat->label }}" class="form-control" name="homeStatsStatLabel" placeholder="label" required="">
+                      <input type="text" value="{{ $stat->label }}" class="form-control" name="stats[{{ $loop->index }}][label]" placeholder="label" required="">
+                      <button class="hapusStats btn btn-danger ">Hapus</button>
+                    </div>
                     </div>
                     @endforeach
+
+                    <div class="tambahan"></div>
+                    <div class="col-12 ">  
+                      <button class="tambahStats btn-add" >Tambah Stat <i class="bi bi-plus-circle"></i></button>
+                    </div>
 
                     
                     <div class="col-12 text-center">
@@ -133,6 +141,44 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
+
+    <script>
+                       const tambahStats = document.querySelector(".tambahStats");
+                          tambahStats.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            let tambahanContainer = document.querySelector(".tambahan");
+                             let index = document.querySelectorAll(".stat-item").length;
+                            let tambahanHTML = "";
+                              tambahanHTML += `
+                              <div class="stat-item">
+                                    <div class="col-12">
+                      <p>Edit Stats Stat Number</p>
+                      <input type="text" class="form-control" name="stats[${index}][number]" placeholder="0000+" required="">
+                    </div>
+                    <div class="col-12 ">
+                      <input type="text" class="form-control" name="stats[${index}][label]" placeholder="label" required="">
+                      <button class="hapusStats btn btn-danger ">Hapus</button>
+                    </div> 
+                    </div> `;
+                               tambahanContainer.innerHTML += tambahanHTML;
+                          });
+                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
+                          hapusStatsButtons.forEach(button => {
+                            button.addEventListener("click", (e) => {
+                              e.preventDefault();
+                              let secondDiv = button.parentElement; // div tempat tombol hapus
+    let firstDiv = secondDiv.previousElementSibling; 
+                              if (firstDiv) firstDiv.remove();
+    secondDiv.remove();
+                            });
+                          });
+                          document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats")) {
+    e.preventDefault();
+    e.target.closest(".stat-item").remove();
+  }
+});
+                    </script>
 
 </body>
 

@@ -69,46 +69,73 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                                <form action="{{ route('postLogin') }}" method="post" class="php-email-form"
+                                <form action="{{ route('updateHomeHero') }}" method="post" class="php-email-form"
                                     data-aos="fade-up" data-aos-delay="600">
                                     @csrf
                                     <div class="row gy-4">
 
                     <div class="col-12">
-                      <p>Edit Hero Title</p>
-                      <input type="text" value="{{ $heroes[0]->content }}" name="HomeHeroTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
-                    </div>
+  <p>Edit Hero Title</p>
+  <input type="hidden" name="heroes[0][id]" value="{{ $heroes[0]->id }}">
+  <input type="text" name="heroes[0][content]" 
+         value="{{ $heroes[0]->content }}" 
+         class="form-control" 
+         placeholder="Penerimaan Mahasiswa Baru 2025/2026" required>
+</div>
 
-                    <div class="col-12 ">
-                      <p>Edit Hero Description</p>
-                      <input type="text" value="{{ $heroes[1]->content }}" class="form-control" name="homeHeroDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
-                    </div>
+<div class="col-12">
+  <p>Edit Hero Description</p>
+  <input type="hidden" name="heroes[1][id]" value="{{ $heroes[1]->id }}">
+  <textarea name="heroes[1][content]" 
+            class="form-control" 
+            placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required>{{ $heroes[1]->content }}</textarea>
+</div>
+
+<div class="col-12">
+  <p>Edit Hero Floating Card 1</p>
+  <input type="hidden" name="heroes[2][id]" value="{{ $heroes[2]->id }}">
+  <input type="text" name="heroes[2][content]" 
+         value="{{ $heroes[2]->content }}" 
+         class="form-control" 
+         placeholder="Administrasi Publik" required>
+</div>
+
+<div class="col-12">
+  <p>Edit Hero Floating Card 2</p>
+  <input type="hidden" name="heroes[3][id]" value="{{ $heroes[3]->id }}">
+  <input type="text" name="heroes[3][content]" 
+         value="{{ $heroes[3]->content }}" 
+         class="form-control" 
+         placeholder="Administrasi Publik" required>
+</div>
+
+<div class="col-12">
+  <p>Edit Hero Floating Card 3</p>
+  <input type="hidden" name="heroes[4][id]" value="{{ $heroes[4]->id }}">
+  <input type="text" name="heroes[4][content]" 
+         value="{{ $heroes[4]->content }}" 
+         class="form-control" 
+         placeholder="Administrasi Publik" required>
+</div>
                    @foreach ($stats as $stat)  
+                   <div class="stat-item">
+                    <input type="hidden" name="stats[{{ $loop->index }}][id]" value="{{ $stat->id }}">
                    <div class="col-12 ">
                      <p>Edit Hero Stat Number</p>
-                     <input type="text" value="{{ $stat->number }}" class="form-control" name="homeHeroStatNumber" placeholder="2200+" required="">
+                     <input type="text" value="{{ $stat->number }}" class="form-control" name="stats[{{ $loop->index }}][number]" placeholder="0000+" required="">
                    </div>
                    <div class="col-12 ">
-                     <input type="text" value="{{ $stat->label }}" class="form-control" name="homeHeroStatLabel" placeholder="Alumni" required="">
+                     <input type="text" value="{{ $stat->label }}" class="form-control" name="stats[{{ $loop->index }}][label]" placeholder="Label" required="">
+                     <button class="hapusStats btn btn-danger mt-2">Hapus</button>
+                   </div>
                    </div>
                    @endforeach
                    <div class="tambahan"></div>
                     <div class="col-12 ">  
-                      <button class="tambahStats"><p>Tambah Stats</p></button>
+                      <button type="button" class="tambahStats btn-add" >Tambah Stat <i class="bi bi-plus-circle"></i></button>
                     </div>
                     
-                    <div class="col-12 ">
-                      <p>Edit Hero Floating Card1 </p>
-                      <input type="text" value="{{ $heroes[2]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Hero Floating Card2 </p>
-                      <input type="text" value="{{ $heroes[3]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Hero Floating Card3 </p>
-                      <input type="text" value="{{ $heroes[4]->content }}" class="form-control" name="homeHeroFloatingCard" placeholder="Administrasi Publik" required="">
-                    </div>
+                    
 
                                         <div class="col-12 text-center">
                                             <div class="loading">Loading</div>
@@ -146,25 +173,55 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
-
+@verbatim
+  
   <script>
                        const tambahStats = document.querySelector(".tambahStats");
                           tambahStats.addEventListener("click", (e) => {
                             e.preventDefault();
                             let tambahanContainer = document.querySelector(".tambahan");
+                             let index = document.querySelectorAll(".stat-item").length;
                             let tambahanHTML = "";
                               tambahanHTML += `
-                                    <div class="col-12 ">
-                                    <p>Edit Hero Stat Number</p>
-                                    <input type="text" class="form-control" name="homeHeroStatNumber" placeholder="2200+">
-                                  </div>
-                                  <div class="col-12 ">
-                                    <input type="text" class="form-control" name="homeHeroStatLabel" placeholder="Alumni">
-                                  </div>
-                                  `;
+<div class="stat-item">
+  <div class="col-12">
+    <p>Tambah Stats Stat Number</p>
+    <input type="text" class="form-control" name="stats[${index}][number]" placeholder="0000+">
+  </div>
+  <div class="col-12">
+    <input type="text" class="form-control" name="stats[${index}][label]" placeholder="label">
+    <button type="button" class="hapusStats btn btn-danger">Hapus</button>
+  </div>
+</div>
+`;
                                tambahanContainer.innerHTML += tambahanHTML;
                           });
+                          document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("hapusStats")) {
+    e.preventDefault();
+
+    // cari stat-item yang mau dihapus
+    let statItem = e.target.closest(".stat-item");
+    let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+    // kalau field ini dari database → tambahin hidden input deleteStats[]
+    if (statIdInput) {
+      let deletedId = statIdInput.value;
+      let form = statItem.closest("form");
+
+      let hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "deleteStats[]";
+      hiddenInput.value = deletedId;
+      form.appendChild(hiddenInput);
+    }
+
+    // hapus field dari DOM
+    statItem.remove();
+  }
+});
                     </script>
+@endverbatim
 
 </body>
 
