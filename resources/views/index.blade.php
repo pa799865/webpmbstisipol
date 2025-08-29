@@ -470,7 +470,43 @@
             </div>
 
         </section><!-- /Features Section -->
+        <!-- Stats Section -->
+        <section id="stats" class="stats section">
 
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="main-headline">{{ $statelemens[0]->content }}</h3>
+                        <p class="main-description">{{ $statelemens[1]->content }}</p>
+
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="row g-4">
+                            @foreach ($stats as $stat)
+                                <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number">
+                                        <span data-purecounter-start="0" data-purecounter-end="{{ $stat->number }}"
+                                            data-purecounter-duration="2" class="purecounter"></span>+
+                                    </div>
+                                    <div class="stat-label">{{ $stat->label }}</div>
+                                </div>
+                            </div>
+                        </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- /Stats Section -->
         <!-- Stats Section -->
         <section id="stats" class="stats section">
 

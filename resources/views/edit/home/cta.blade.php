@@ -69,31 +69,40 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                                <form action="{{ route('postLogin') }}" method="post" class="php-email-form"
+                                <form action="{{ route('updateHomeCta') }}" method="post" class="php-email-form"
                                     data-aos="fade-up" data-aos-delay="600">
                                     @csrf
                                     <div class="row gy-4">
 
                     <div class="col-12">
                       <p>Edit CTA Title</p>
-                      <input type="text" value="{{ $ctas[0]->content }}" name="HomeCtaTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
+                      <input type="hidden" name="ctas[0][id]" value="{{ $ctas[0]->id }}">
+                      <input type="text" value="{{ $ctas[0]->content }}" name="ctas[0][content]" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Cta Description</p>
-                      <textarea type="text" class="form-control" name="homeCtaDescription" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
+                      <input type="hidden" name="ctas[1][id]" value="{{ $ctas[1]->id }}">
+                      <textarea type="text" class="form-control" name="ctas[1][content]" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Cta Image</p>
-                      <input type="file" value="{{ $ctas[2]->content }}" class="form-control" name="homeCtaImg" placeholder="Alumni" required="">
+                      <input type="hidden" name="img_cta_id" value="{{ $ctas[2]->id }}">
+<input type="file" name="img_{{ $ctas[2]->id }}_visual">
+
+<img src="{{ asset('/assets/img/misc/' . $ctas[2]->content) }}" width="150">
+
                     </div>
                     <div class="col-12 ">
                       <p>Edit Cta List</p>
                        </div>
-                    @foreach ($ctalists as $ctalist)      
-                      <input type="text" value="{{ $ctalist->content }}" class="form-control" name="homeCtaList" placeholder="List" required="">
+                    @foreach ($ctalists as $ctalist)     
+                    <div class="stat-item"> 
+                      <input type="hidden" name="ctalist[{{ $loop->index }}][id]" value="{{ $ctalist->id }}">
+                      <input type="text" value="{{ $ctalist->content }}" class="form-control" name="ctalist[{{ $loop->index }}][content]" placeholder="List" required="">
                       <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
+                    </div>
                     @endforeach
                     <div class="tambahan"></div>
                     <div class="col-12 ">  
@@ -143,28 +152,37 @@
                           tambahStats.addEventListener("click", (e) => {
                             e.preventDefault();
                             let tambahanContainer = document.querySelector(".tambahan");
+                             let index = document.querySelectorAll(".stat-item").length;
                             let tambahanHTML = "";
                               tambahanHTML += `
                               <div class="stat-item">
-                                    <input type="text" class="form-control" name="homeCtaList" placeholder="List" required="">
+                                    <input type="text" class="form-control" name="ctalist[${index}][content]" placeholder="List" required="">
                       <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
                        </div> `;
                                tambahanContainer.innerHTML += tambahanHTML;
                           });
-                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
-                          hapusStatsButtons.forEach(button => {
-                            button.addEventListener("click", (e) => {
-                              e.preventDefault();
-                              let secondDiv = button.parentElement; // div tempat tombol hapus
-    let firstDiv = secondDiv.previousElementSibling; 
-                              if (firstDiv) firstDiv.remove();
-    secondDiv.remove();
-                            });
-                          });
                           document.addEventListener("click", function(e) {
   if (e.target.classList.contains("hapusStats")) {
     e.preventDefault();
-    e.target.closest(".stat-item").remove();
+
+    // cari stat-item yang mau dihapus
+    let statItem = e.target.closest(".stat-item");
+    let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+    // kalau field ini dari database → tambahin hidden input deleteStats[]
+    if (statIdInput) {
+      let deletedId = statIdInput.value;
+      let form = statItem.closest("form");
+
+      let hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "deleteStats[]";
+      hiddenInput.value = deletedId;
+      form.appendChild(hiddenInput);
+    }
+
+    // hapus field dari DOM
+    statItem.remove();
   }
 });
                     </script>

@@ -480,9 +480,8 @@
 
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="main-headline">Mari Bergabung</h3>
-                        <p class="main-description">Mari bergabung dengan mahasiswa yang bangga berkuliah di br STISIPOL
-                            Raja Haji Tanjungpinang.</p>
+                        <h3 class="main-headline">{{ $statelemens[0]->content }}</h3>
+                        <p class="main-description">{{ $statelemens[1]->content }}</p>
 
                     </div>
                 </div>
@@ -533,12 +532,11 @@
                         <article class="price-card {{ $pricingcard->special }} h-100">
 
                             <div class="card-head">
-                                <span class="badge-title{{ $pricingcard->special2 }}">Semester Genap</span>
-                                <h3 class="title{{ $pricingcard->special2 }}">Kelas Reguler</h3>
-                                <p class="subtitle{{ $pricingcard->special2 }}">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum.</p>
+                                <span class="badge-title{{ $pricingcard->special2 }}">{{ $pricingcard->badge }}</span>
+                                <h3 class="title{{ $pricingcard->special2 }}">{{ $pricingcard->title }}</h3>
+                                <p class="subtitle{{ $pricingcard->special2 }}">{{ $pricingcard->description }}</p>
                                 <div class="price-wrap{{ $pricingcard->special2 }}">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.353 <span>K</span>
+                                    <span class="price price-monthly"><sup>Rp</sup>{{ $pricingcard->price }} <span>K</span>
                                     @if ($pricingcard->special5 === 'special')
                                         <span class="period"></span></span>
                                     @else

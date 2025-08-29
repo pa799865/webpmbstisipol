@@ -69,42 +69,47 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                <form action="{{ route('postLogin') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
+                <form action="{{ route('updateHomePricing') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
                   @csrf
                   <div class="row gy-4">
                     <div class="col-12">
                       <p>Edit Pricing Card Title</p>
-                      <input type="text" value="{{ $pricings[0]->content }}" class="form-control" name="homePricingShadow" placeholder="Semester Ganjil" required="">
+                       <input type="hidden" name="pricings[0][id]" value="{{ $pricings[0]->id }}">
+                      <input type="text" value="{{ $pricings[0]->content }}" class="form-control" name="pricings[0][content]" placeholder="Semester Ganjil" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $pricings[1]->content }}" class="form-control" name="homePricingTitle" placeholder="Semester Ganjil" required="">
+                      <input type="hidden" name="pricings[1][id]" value="{{ $pricings[1]->id }}">
+                      <input type="text" value="{{ $pricings[1]->content }}" class="form-control" name="pricings[1][content]" placeholder="Semester Ganjil" required="">
                     </div>
                     <div class="col-12 ">
                       <p>Edit Pricing Card Description</p>
-                      <input type="text" value="{{ $pricings[2]->content }}" class="form-control" name="homePricingDescription" placeholder="Semester Ganjil" required="">
+                      <input type="hidden" name="pricings[2][id]" value="{{ $pricings[2]->id }}">
+                      <input type="text" value="{{ $pricings[2]->content }}" class="form-control" name="pricings[2][content]" placeholder="Semester Ganjil" required="">
                     </div>
 
                     @foreach ($pricingcards as $pricingcard) 
-                    <div class="stat-items">
+                    <div class="stat-items1">
+                      <input type="hidden" name="pricingcard[{{ $loop->index }}][id]" value="{{ $pricingcard->id }}">
                     <div class="col-12 ">
                       <p>Edit Pricing Card</p>
-                      <input type="text" value="{{ $pricingcard->badge }}" class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
+                      <input type="text" value="{{ $pricingcard->badge }}" class="form-control" name="pricingcard[{{ $loop->index }}][badge]" placeholder="Semester Ganjil" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $pricingcard->title }}" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
+                      <input type="text" value="{{ $pricingcard->title }}" class="form-control" name="pricingcard[{{ $loop->index }}][title]" placeholder="Kelas Reguler" required="">
                     </div>
                     <div class="col-12 ">
-                      <textarea type="text"  class="form-control" name="homePricingCardDescription" placeholder="3.453" required="">{{ $pricingcard->description }}</textarea>
+                      <textarea type="text"  class="form-control" name="pricingcard[{{ $loop->index }}][description]" placeholder="3.453" required="">{{ $pricingcard->description }}</textarea>
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $pricingcard->price }}" class="form-control" name="homePricingCardPrice" placeholder="/Semester" required="">
+                      <input type="text" value="{{ $pricingcard->price }}" class="form-control" name="pricingcard[{{ $loop->index }}][price]" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" value="{{ $pricingcard->period }}" class="form-control" name="homePricingCardPeriod" placeholder="/Semester" required="">
+                      <input type="text" value="{{ $pricingcard->period }}" class="form-control" name="pricingcard[{{ $loop->index }}][period]" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 d-flex justify-content-between align-items-center ">
                         <label for="">
-                      <input type="checkbox" value="special"  name="homePricingCardTipe" placeholder="/Semester" required="" @if ($pricingcard->tipe === 'special')
+                           <input type="hidden" name="pricingcard[{{ $loop->index }}][tipe]" value="">
+                      <input type="checkbox" value="special"  name="pricingcard[{{ $loop->index }}][tipe]" placeholder="/Semester"  @if ($pricingcard->tipe === 'special')
                         checked
                       @endif> centang jika anda ingin cardnya berwarna berbeda
                       </label>               
@@ -124,8 +129,9 @@
                       </div>
 
                       @foreach ($listbiasas as $listbiasa)
-                      <div class="stat-items">
-                      <input type="text" value="{{ $listbiasa->content }}" class="form-control mt-3" name="homePricingCardFeaturedCommonList" placeholder="List Common" required="">
+                      <div class="stat-items2">
+                        <input type="hidden" name="listbiasa[{{ $loop->index }}][id]" value="{{ $listbiasa->id }}">
+                      <input type="text" value="{{ $listbiasa->content }}" class="form-control mt-3" name="listbiasa[{{ $loop->index }}][content]" placeholder="List Common" >
                       <button class="hapusStats1 btn btn-danger ">Hapus</button>
                       </div>
                       @endforeach
@@ -142,8 +148,9 @@
                       </div>
 
                      @foreach ($listspecials as $listspecial)
-                     <div class="stat-items">
-                      <input type="text" value="{{ $listspecial->content }}" class="form-control mt-3" name="homePricingCardFeaturedSpesialList" placeholder="List Spesial" required="">
+                     <div class="stat-items3">
+                         <input type="hidden" name="listspecial[{{ $loop->index }}][id]" value="{{ $listspecial->id }}">
+                      <input type="text" value="{{ $listspecial->content }}" class="form-control mt-3" name="listspecial[{{ $loop->index }}][content]" placeholder="List Spesial" >
                       <button class="hapusStats2 btn btn-danger ">Hapus</button>
                       </div>
                       @endforeach
@@ -194,9 +201,11 @@
                           tambahStats1.addEventListener("click", (e) => {
                             e.preventDefault();
                             let tambahanContainer1 = document.querySelector(".tambahan1");
+                            let index = document.querySelectorAll(".stat-items2").length;
                             let tambahanHTML1 = "";
-                              tambahanHTML1 += ` <div class="stat-items">
-                                    <input type="text" class="form-control mt-3" name="homePricingCardFeaturedCommonList" placeholder="List Common" required="">
+                              tambahanHTML1 += ` <div class="stat-items2">
+                                <input type="hidden" name="listbiasa[${index}][id]" value="{{ $listbiasa->id }}">
+                                    <input type="text" class="form-control mt-3" name="listbiasa[${index}][content]" placeholder="List Common" >
                       <button class="hapusStats1 btn btn-danger ">Hapus</button>
                        </div> 
                        `;
@@ -209,10 +218,13 @@
                           tambahStats2.addEventListener("click", (e) => {
                             e.preventDefault();
                             let tambahanContainer2 = document.querySelector(".tambahan2");
+                            let index = document.querySelectorAll(".stat-items3").length;
                             let tambahanHTML2 = "";
+
                               tambahanHTML2 += `
-                              <div class="stat-items">
-                                   <input type="text" class="form-control mt-3" name="homePricingCardFeaturedSpesialList" placeholder="List Spesial" required="">
+                              <div class="stat-items3">
+                                <input type="hidden" name="listspecial[${index}][id]" value="{{ $listspecial->id }}">
+                                   <input type="text" class="form-control mt-3" name="listspecial[${index}][content]" placeholder="List Spesial" >
                       <button class="hapusStats2 btn btn-danger ">Hapus</button>
                        </div> `;
                                tambahanContainer2.innerHTML += tambahanHTML2;
@@ -223,28 +235,30 @@
                           tambahStats3.addEventListener("click", (e) => {
                             e.preventDefault();
                             let tambahanContainer3 = document.querySelector(".tambahan3");
+                            let index = document.querySelectorAll(".stat-items1").length;
                             let tambahanHTML3 = "";
                               tambahanHTML3 += `
-                              <div class="stat-items"> 
+                              <div class="stat-items1"> 
                               <div class="col-12 ">
                       <p>Edit Pricing Card</p>
-                      <input type="text"class="form-control" name="homePricingBadgeTitle" placeholder="Semester Ganjil" required="">
+                      <input type="text"class="form-control" name="pricingcard[${index}][badge]" placeholder="Semester Ganjil" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingCardTitle" placeholder="Kelas Reguler" required="">
+                      <input type="text" class="form-control" name="pricingcard[${index}][title]" placeholder="Kelas Reguler" required="">
                     </div>
                     <div class="col-12 ">
-                      <textarea type="text"  class="form-control" name="homePricingCardDescription" placeholder="3.453" required=""></textarea>
+                      <textarea type="text"  class="form-control" name="pricingcard[${index}][description]" placeholder="3.453" required=""></textarea>
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingCardPrice" placeholder="/Semester" required="">
+                      <input type="text" class="form-control" name="pricingcard[${index}][price]" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="homePricingCardPeriod" placeholder="/Semester" required="">
+                      <input type="text" class="form-control" name="pricingcard[${index}][period]" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 d-flex justify-content-between align-items-center ">
                         <label for="">
-                      <input type="checkbox"  name="homePricingCardTipe" placeholder="/Semester" required="" @if ($pricingcard->tipe === 'special')
+                           <input type="hidden" name="pricingcard[[${index}][tipe]" value="">
+                      <input type="checkbox" value="special" name="pricingcard[${index}][tipe]" placeholder="/Semester" @if ($pricingcard->tipe === 'special')
                         checked
                       @endif> centang jika anda ingin cardnya berwarna berbeda
                       </label>               
@@ -271,35 +285,76 @@
 
                     </script>
                     <script>
-document.addEventListener("click", function(e) {
+                      document.addEventListener("click", function(e) {
   if (e.target.classList.contains("hapusStats3")) {
     e.preventDefault();
-    const wrapper = e.target.closest(".stat-items");
-    if (wrapper) {
-      wrapper.remove();
+
+    // cari stat-item yang mau dihapus
+    let statItem = e.target.closest(".stat-items1");
+    let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+    // kalau field ini dari database → tambahin hidden input deleteStats[]
+    if (statIdInput) {
+      let deletedId = statIdInput.value;
+      let form = statItem.closest("form");
+
+      let hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "deleteStats[]";
+      hiddenInput.value = deletedId;
+      form.appendChild(hiddenInput);
     }
+
+    // hapus field dari DOM
+    statItem.remove();
   }
 });
-</script>
-                    <script>
-document.addEventListener("click", function(e) {
+                      document.addEventListener("click", function(e) {
   if (e.target.classList.contains("hapusStats1")) {
     e.preventDefault();
-    const wrapper = e.target.closest(".stat-items");
-    if (wrapper) {
-      wrapper.remove();
+
+    // cari stat-item yang mau dihapus
+    let statItem = e.target.closest(".stat-items2");
+    let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+    // kalau field ini dari database → tambahin hidden input deleteStats[]
+    if (statIdInput) {
+      let deletedId = statIdInput.value;
+      let form = statItem.closest("form");
+
+      let hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "deleteStats[]";
+      hiddenInput.value = deletedId;
+      form.appendChild(hiddenInput);
     }
+
+    // hapus field dari DOM
+    statItem.remove();
   }
 });
-</script>
-                    <script>
-document.addEventListener("click", function(e) {
+                      document.addEventListener("click", function(e) {
   if (e.target.classList.contains("hapusStats2")) {
     e.preventDefault();
-    const wrapper = e.target.closest(".stat-items");
-    if (wrapper) {
-      wrapper.remove();
+
+    // cari stat-item yang mau dihapus
+    let statItem = e.target.closest(".stat-items3");
+    let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+    // kalau field ini dari database → tambahin hidden input deleteStats[]
+    if (statIdInput) {
+      let deletedId = statIdInput.value;
+      let form = statItem.closest("form");
+
+      let hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "deleteStats[]";
+      hiddenInput.value = deletedId;
+      form.appendChild(hiddenInput);
     }
+
+    // hapus field dari DOM
+    statItem.remove();
   }
 });
 </script>

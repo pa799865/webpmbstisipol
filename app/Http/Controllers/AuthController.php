@@ -47,7 +47,7 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('admin.index')->with('success','Login Berhasil!');
+            return redirect()->route('admin')->with('success','Login Berhasil!');
         }
         return back()->withErrors(['username' => 'Username atau Password']);
     }

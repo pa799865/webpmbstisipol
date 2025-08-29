@@ -11,7 +11,7 @@ Route::post('/postLogin', [AuthController::class,'login'])->name('postLogin');
 Route::middleware(['auth'])->group(function () {
     // Route::post('logout', [AuthController::class,'logout'])->name('logout');
     Route::resource('admin', AdminController::class);
-    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/edit/home/hero', [KontenController::class,'showHomeHeroForm'])->name('editHomeHero');
     Route::get('/edit/home/services', [KontenController::class,'showHomeServicesForm'])->name('editHomeServices');
     Route::get('/edit/home/features', [KontenController::class,'showHomeFeaturesForm'])->name('editHomeFeatures');
@@ -23,6 +23,14 @@ Route::middleware(['auth'])->group(function () {
     ->name('updateHomeHero');
     Route::post('/edit/home/services/update', [KontenController::class, 'updateHomeServices'])
     ->name('updateHomeServices');
+    Route::post('/edit/home/features/update', [KontenController::class, 'updateHomeFeatures'])
+    ->name('updateHomeFeatures');
+    Route::post('/edit/home/stats/update', [KontenController::class, 'updateHomeStats'])
+    ->name('updateHomeStats');
+    Route::post('/edit/home/pricing/update', [KontenController::class, 'updateHomePricing'])
+    ->name('updateHomePricing');
+    Route::post('/edit/home/cta/update', [KontenController::class, 'updateHomeCta'])
+    ->name('updateHomeCta');
     // Route::post('/tickets/{ticket}/responses', [ResponseController::class,'store'])->name('responses.store');
     // Route::middleware(['cekrole:admin'])->group(function () {
     //     Route::post('/tickets/{ticket}/update-status', [TicketController::class,'updateStatus'])->name('tickets.updateStatus');

@@ -69,19 +69,21 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                                <form action="{{ route('postLogin') }}" method="post" class="php-email-form"
+                                <form action="{{ route('updateHomeStats') }}" method="post" class="php-email-form"
                                     data-aos="fade-up" data-aos-delay="600">
                                     @csrf
                                     <div class="row gy-4">
 
                     <div class="col-12">
                       <p>Edit Stats Main Heading</p>
-                      <input type="text" value="{{ $statelemens[0]->content }}" name="HomeStatsMainHeading" class="form-control" placeholder="Mari Bergabung" required="">
+                      <input type="hidden" name="statelemens[0][id]" value="{{ $statelemens[0]->id }}">
+                      <input type="text" value="{{ $statelemens[0]->content }}" name="statelemens[0][content]" class="form-control" placeholder="Mari Bergabung" required="">
                     </div>
 
                     <div class="col-12 ">
                       <p>Edit Stats Main Description</p>
-                      <input type="text" value="{{ $statelemens[1]->content }}" class="form-control" name="homeHeroDescription" placeholder="Mari bergabung dengan mahasiswa yang bangga berkuliah di br STISIPOL
+                       <input type="hidden" name="statelemens[1][id]" value="{{ $statelemens[1]->id }}">
+                      <input type="text" value="{{ $statelemens[1]->content }}" class="form-control" name="statelemens[1][content]" placeholder="Mari bergabung dengan mahasiswa yang bangga berkuliah di br STISIPOL
                             Raja Haji Tanjungpinang." required="">
                     </div>
                     @foreach ( $stats as $stat)

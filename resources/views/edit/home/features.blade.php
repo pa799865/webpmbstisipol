@@ -69,45 +69,77 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                <form action="{{ route('postLogin') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
+                <form action="{{ route('updateHomeFeatures') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600" enctype="multipart/form-data">
                   @csrf
                   <div class="row gy-4">
                     @foreach ( $programstudyitems as $programstudyitem )
-                      
+                    <div class="stat-item">
+                      <input type="hidden" name="programstudyitem[{{ $loop->index }}][id]" value="{{ $programstudyitem->id }}">
                     <div class="col-12 ">
                       <p>Edit Features Tab Wrapper</p>
-                      <input type="text" value="{{ $programstudyitem->title }}" class="form-control" name="homeFeaturesTabWrapperTitle" placeholder="Ilmu Administrasi Publik" required="">
+                      <input type="text" value="{{ $programstudyitem->title }}" class="form-control" name="programstudyitem[{{ $loop->index }}][title]" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
                     <div class="col-12 ">
-                      <textarea type="text" class="form-control" name="homeFeaturesTabWrapperDescription" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">{{ $programstudyitem->description }}</textarea>
+                      <textarea type="text" class="form-control" name="programstudyitem[{{ $loop->index }}][description]" placeholder="Lorem ipsum, dolor sit amet consectetur" required="">{{ $programstudyitem->description }}</textarea>
+                    </div>
                     </div>
                     @endforeach
                     @foreach ( $programstudycontents as $programstudycontent )
-                      
+                      <input type="hidden" name="programstudycontent[{{ $loop->index }}][id]" value="{{ $programstudycontent->id }}">
                     <div class="col-12 ">
                       <p>Edit Features Tab Content</p>
-                      <input type="text" value="{{ $programstudycontent->title }}" class="form-control" name="homeFeaturesTabContentTitle" placeholder="Ilmu Administrasi Publik" required="">
+                      <input type="text" value="{{ $programstudycontent->title }}" class="form-control" name="programstudycontent[{{ $loop->index }}][title]" placeholder="Ilmu Administrasi Publik" required="">
                     </div>
 
                     <div class="col-12 ">
-                      <textarea type="text" class="form-control" name="homeFeaturesTabContentDescription" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang dapat dipilih sesuai minat mahasiswa:" required="">{{ $programstudycontent->description }}</textarea>
+                      <textarea type="text" class="form-control" name="programstudycontent[{{ $loop->index }}][description]" placeholder="Program Studi Administrasi Publik menawarkan tiga pilihan konsentrasi yang dapat dipilih sesuai minat mahasiswa:" required="">{{ $programstudycontent->description }}</textarea>
                     </div>
                     <p>List</p>
+                    <div class="stat-item">
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudycontent->list1 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
+                      <input type="text" value="{{ $programstudycontent->list1 }}" class="form-control" name="programstudycontent[{{ $loop->index }}][list1]" placeholder="masukkan konten" >
+                      <button type="button" class="hapusField btn btn-danger" data-id="{{ $programstudycontent->id }}" data-field="list1">
+  Hapus
+</button>
                     </div>
+                    </div>
+                    <div class="stat-item">
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudycontent->list2 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
+                      <input type="text" value="{{ $programstudycontent->list2 }}" class="form-control" name="programstudycontent[{{ $loop->index }}][list2]" placeholder="masukkan konten" >
+                      <button type="button" class="hapusField btn btn-danger" data-id="{{ $programstudycontent->id }}" data-field="list2">
+  Hapus
+</button>
                     </div>
+                    </div>
+                    <div class="stat-item">
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudycontent->list3 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
+                      <input type="text" value="{{ $programstudycontent->list3 }}" class="form-control" name="programstudycontent[{{ $loop->index }}][list3]" placeholder="masukkan konten" >
+                      <button type="button" class="hapusField btn btn-danger" data-id="{{ $programstudycontent->id }}" data-field="list2">
+  Hapus
+</button>
                     </div>
+                    </div>
+                    <div class="stat-item">
                     <div class="col-12 ">
-                      <input type="text" value="{{ $programstudycontent->list4 }}" class="form-control" name="homeFeaturesTabContentList" placeholder="masukkan konten" required="">
+                      
+                      <input type="text" value="{{ $programstudycontent->list4 }}" class="form-control" name="programstudycontent[{{ $loop->index }}][list4]" placeholder="masukkan konten" >
+                      <button type="button" class="hapusField btn btn-danger" data-id="{{ $programstudycontent->id }}" data-field="list2">
+  Hapus
+</button>
                     </div>
-                    <div class="col-12 ">
-                      <input type="file" value="{{$programstudycontent->img }}" class="form-control" name="homeFeaturesTabContentVisual" placeholder="Administrasi Keuangan dan Perpajakan (Belum Dibuka)" required="">
                     </div>
+                    <div class="col-12 mt-3">
+    <p>Gambar Lama:</p>
+    @if($programstudycontent->img)
+      <img src="{{ asset('assets/img/features/' . $programstudycontent->img) }}" 
+           alt="preview" width="200">
+    @endif
+  </div>
+
+  <div class="col-12 mt-2">
+    <input type="file" class="form-control" 
+           name="programstudycontent[{{ $loop->index }}][img]">
+  </div>
                     @endforeach
 
                                             <div class="col-12 text-center">
@@ -147,6 +179,29 @@
 
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
+
+    <script>
+      document.querySelectorAll('.hapusField').forEach(btn => {
+    btn.addEventListener('click', function() {
+        let field = this.dataset.field;
+        let id = this.dataset.id;
+
+        // cari form utama
+        let form = this.closest('form');
+        // tambah hidden input "delete_field"
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = `deleteField[${id}][]`; 
+        input.value = field;
+        form.appendChild(input);
+
+        // kosongkan input text biar tidak terkirim nilainya
+        this.previousElementSibling.value = "";
+    });
+});
+
+
+    </script>
 
 </body>
 
