@@ -243,7 +243,8 @@
                     <li><a href="#contact">Download</a></li>
 
                     <li>
-                        <a id="daftar" href="#" target="_blank" onmouseover="this.style.boxShadow='1px 1px 30px #023047';this.style.color='#fff';this.style.border='none';this.querySelector('span').style.visibility='visible';this.querySelector('span').style.transform='scale(100) translateX(2px)';"
+                        <a id="daftar" href="#" target="_blank"
+                            onmouseover="this.style.boxShadow='1px 1px 30px #023047';this.style.color='#fff';this.style.border='none';this.querySelector('span').style.visibility='visible';this.querySelector('span').style.transform='scale(100) translateX(2px)';"
                             onmouseout="this.style.boxShadow='none';this.style.color='#4e4e4e';this.style.border='2px solid #d5e5e5';this.querySelector('span').style.visibility='hidden';this.querySelector('span').style.transform='scale(1)';">
                             Daftar
                             <span></span>
@@ -280,9 +281,9 @@
                             <div class="hero-stats">
                                 @foreach ($stats as $stat)
                                     <div class="stat-item">
-                                    <span class="stat-number">{{ $stat->number }}+</span>
-                                    <span class="stat-label">{{ $stat->label }}</span>
-                                </div>
+                                        <span class="stat-number">{{ $stat->number }}+</span>
+                                        <span class="stat-label">{{ $stat->label }}</span>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -314,7 +315,7 @@
                 </div>
 
             </div>
-<a href="{{route('editHomeHero')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeHero') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Hero Section -->
 
         <!-- Services Section -->
@@ -345,7 +346,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="hero-visual" data-aos="fade-left" data-aos-delay="150">
-                            <img src="assets/img/services/{{ $services[5]->content }}" alt="Services" class="img-fluid">
+                            <img src="assets/img/services/{{ $services[5]->content }}" alt="Services"
+                                class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -354,26 +356,26 @@
                     <div class="row g-4">
                         @foreach ($servicescards as $servicecard)
                             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-card">
-                                <div class="card-number">
-                                    <span><i class="bi bi-tv"></i></span>
+                                <div class="service-card">
+                                    <div class="card-number">
+                                        <span><i class="bi bi-tv"></i></span>
+                                    </div>
+                                    <div class="card-content">
+                                        <h5 class="service-title">
+                                            <a href="#">{{ $servicecard->title }}</a>
+                                        </h5>
+                                        <p class="service-description">{{ $servicecard->description }}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="card-content">
-                                    <h5 class="service-title">
-                                        <a href="#">{{ $servicecard->title }}</a>
-                                    </h5>
-                                    <p class="service-description">{{ $servicecard->description }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End Service Card -->
+                            </div><!-- End Service Card -->
                         @endforeach
 
                     </div>
                 </div>
 
             </div>
-            <a href="{{route('editHomeServices')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeServices') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Services Section -->
 
         <!-- Features Section -->
@@ -389,88 +391,90 @@
 
                 <div class="tabs-wrapper">
                     <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
-                        @foreach ($programstudyitems as $programstudyitem)                            
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-{{ $programstudyitem->tab }}">
-                                <div class="tab-icon">
-                                    <i class="bi bi-rocket-takeoff"></i>
-                                </div>
-                                <div class="tab-content">
-                                    <h5>{{ $programstudyitem->title }}</h5>
-                                    <span>{{ $programstudyitem->description }}</span>
-                                </div>
-                            </a>
-                        </li><!-- End tab nav item -->
+                        @foreach ($programstudyitems as $programstudyitem)
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#features-tab-{{ $programstudyitem->tab }}">
+                                    <div class="tab-icon">
+                                        <i class="bi bi-rocket-takeoff"></i>
+                                    </div>
+                                    <div class="tab-content">
+                                        <h5>{{ $programstudyitem->title }}</h5>
+                                        <span>{{ $programstudyitem->description }}</span>
+                                    </div>
+                                </a>
+                            </li><!-- End tab nav item -->
                         @endforeach
                     </ul>
 
                     <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-                        @foreach ($programstudycontents as $programstudycontent)                           
-                        <div class="tab-pane" id="features-tab-{{ $programstudycontent->tab }}">
-                            <div class="row align-items-center">
+                        @foreach ($programstudycontents as $programstudycontent)
+                            <div class="tab-pane" id="features-tab-{{ $programstudycontent->tab }}">
+                                <div class="row align-items-center">
 
-                                <div class="col-lg-5">
-                                    <div class="content-wrapper">
-                                        <div class="icon-badge">
-                                            <i class="bi bi-rocket-takeoff"></i>
+                                    <div class="col-lg-5">
+                                        <div class="content-wrapper">
+                                            <div class="icon-badge">
+                                                <i class="bi bi-rocket-takeoff"></i>
+                                            </div>
+                                            <h3>{{ $programstudycontent->title }}</h3>
+                                            <p>{{ $programstudycontent->description }}</p>
+
+                                            <div class="feature-grid">
+                                                <div class="feature-item">
+                                                    @if ($programstudycontent->list1 === null)
+                                                        <i></i>
+                                                    @else
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                    @endif
+                                                    <span>{{ $programstudycontent->list1 }}</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    @if ($programstudycontent->list2 === null)
+                                                        <i></i>
+                                                    @else
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                    @endif
+                                                    <span>{{ $programstudycontent->list2 }}</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    @if ($programstudycontent->list3 === null)
+                                                        <i></i>
+                                                    @else
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                    @endif
+
+                                                    <span>{{ $programstudycontent->list3 }}</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    @if ($programstudycontent->list4 === null)
+                                                        <i></i>
+                                                    @else
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                    @endif
+                                                    <span>{{ $programstudycontent->list4 }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h3>{{ $programstudycontent->title }}</h3>
-                                        <p>{{ $programstudycontent->description }}</p>
+                                    </div>
 
-                                        <div class="feature-grid">
-                                            <div class="feature-item">
-                                                @if ($programstudycontent->list1 === null)
-                                                    <i></i>
-                                                    @else
-                                                    <i class="bi bi-check-circle-fill"></i>
-                                                @endif
-                                                <span>{{ $programstudycontent->list1 }}</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                @if ($programstudycontent->list2 === null)
-                                                    <i></i>
-                                                    @else
-                                                    <i class="bi bi-check-circle-fill"></i>
-                                                @endif
-                                                <span>{{ $programstudycontent->list2 }}</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                @if ($programstudycontent->list3 === null)
-                                                    <i></i>
-                                                    @else
-                                                    <i class="bi bi-check-circle-fill"></i>
-                                                @endif
-
-                                                <span>{{ $programstudycontent->list3 }}</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                @if ($programstudycontent->list4 === null)
-                                                    <i></i>
-                                                @else
-                                                    <i class="bi bi-check-circle-fill"></i>
-                                                @endif                                                
-                                                <span>{{ $programstudycontent->list4 }}</span>
+                                    <div class="col-lg-7">
+                                        <div class="visual-content">
+                                            <div class="main-image">
+                                                <img src="assets/img/features/{{ $programstudycontent->img }}"
+                                                    alt="" class="img-fluid">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-lg-7">
-                                    <div class="visual-content">
-                                        <div class="main-image">
-                                            <img src="assets/img/features/{{ $programstudycontent->img }}" alt="" class="img-fluid">
-                                        </div>
-                                    </div>
                                 </div>
-
-                            </div>
-                        </div><!-- End tab content item -->
+                            </div><!-- End tab content item -->
                         @endforeach
                     </div>
                 </div>
 
             </div>
-<a href="{{route('editHomeFeatures')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeFeatures') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Features Section -->
 
         <!-- Stats Section -->
@@ -488,28 +492,29 @@
 
                 <div class="stats-grid">
                     <div class="row g-4">
-                            @foreach ($stats as $stat)
-                                <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number">
-                                        <span data-purecounter-start="0" data-purecounter-end="{{ $stat->number }}"
-                                            data-purecounter-duration="2" class="purecounter"></span>+
+                        @foreach ($stats as $stat)
+                            <div class="col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="bi bi-people-fill"></i>
                                     </div>
-                                    <div class="stat-label">{{ $stat->label }}</div>
+                                    <div class="stat-content">
+                                        <div class="stat-number">
+                                            <span data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stat->number }}"
+                                                data-purecounter-duration="2" class="purecounter"></span>+
+                                        </div>
+                                        <div class="stat-label">{{ $stat->label }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                            @endforeach
-                        </div>
+                        @endforeach
                     </div>
                 </div>
+            </div>
 
             </div>
-<a href="{{route('editHomeStats')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeStats') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Stats Section -->
 
         <!-- Pricing Section -->
@@ -528,58 +533,64 @@
 
                 <div class="row gy-4">
                     @foreach ($pricingcards as $pricingcard)
-                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
-                        <article class="price-card {{ $pricingcard->special }} h-100">
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                            <article class="price-card {{ $pricingcard->special }} h-100">
 
-                            <div class="card-head">
-                                <span class="badge-title{{ $pricingcard->special2 }}">{{ $pricingcard->badge }}</span>
-                                <h3 class="title{{ $pricingcard->special2 }}">{{ $pricingcard->title }}</h3>
-                                <p class="subtitle{{ $pricingcard->special2 }}">{{ $pricingcard->description }}</p>
-                                <div class="price-wrap{{ $pricingcard->special2 }}">
-                                    <span class="price price-monthly"><sup>Rp</sup>{{ $pricingcard->price }} <span>K</span>
-                                    @if ($pricingcard->special5 === 'special')
-                                        <span class="period"></span></span>
+                                <div class="card-head">
+                                    <span
+                                        class="badge-title{{ $pricingcard->special2 }}">{{ $pricingcard->badge }}</span>
+                                    <h3 class="title{{ $pricingcard->special2 }}">{{ $pricingcard->title }}</h3>
+                                    <p class="subtitle{{ $pricingcard->special2 }}">{{ $pricingcard->description }}
+                                    </p>
+                                    <div class="price-wrap{{ $pricingcard->special2 }}">
+                                        <span class="price price-monthly"><sup>Rp</sup>{{ $pricingcard->price }}
+                                            <span>K</span>
+                                            @if ($pricingcard->special5 === 'special')
+                                                <span class="period"></span>
+                                        </span>
                                     @else
                                         <span class="period">{{ $pricingcard->period }}</span></span>
-                                    @endif                          
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                @if ($pricingcard->special5 === 'special')
-                                    @foreach ($listspecials as $listspecial)
-                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listspecial->content }}</li>
-                                @endforeach
-                                @else
-                                @foreach ($listbiasas as $listbiasa)
-                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listbiasa->content }}</li>
-                                @endforeach
-                                @endif
-                                
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose{{ $pricingcard->special2 }} w-100">Daftar Sekarang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-                    @endforeach
-
+                    @endif
                 </div>
+            </div>
+
+            <ul class="feature-list list-unstyled mb-4">
+                @if ($pricingcard->special5 === 'special')
+                    @foreach ($listspecials as $listspecial)
+                        <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle"
+                                id="{{ $pricingcard->special4 }}"></i>{{ $listspecial->content }}</li>
+                    @endforeach
+                @else
+                    @foreach ($listbiasas as $listbiasa)
+                        <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle"
+                                id="{{ $pricingcard->special4 }}"></i>{{ $listbiasa->content }}</li>
+                    @endforeach
+                @endif
+
+            </ul>
+
+            <div class="cta">
+                <a href="#" class="btn btn-choose{{ $pricingcard->special2 }} w-100">Daftar Sekarang</a>
+            </div>
+            </article><!-- End Pricing Item -->
+            </div>
+            @endforeach
 
             </div>
-<a href="{{route('editHomePricing')}}" class="btn-primary">Edit Konten</a>
+
+            </div>
+            <a href="{{ route('editHomePricing') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Pricing Section -->
 
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
 
-             <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="row align-items-lg-center">
                     <div class="col-lg-5 order-lg-2" data-aos="fade-left" data-aos-delay="200">
                         <div class="image-wrapper position-relative">
-                            <img src="assets/img/misc/{{ $ctas[2]->content }}" alt="Security Solutions"
+                            <img src="assets/img/misc/{{ $ctas[2]->content }}" alt="CTA Visual"
                                 class="img-fluid main-image">
                         </div>
                     </div>
@@ -591,11 +602,11 @@
                             </p>
 
                             <ul class="feature-list">
-                                @foreach ($ctalists as $ctalist)     
-                                <li>
-                                    <i class="bi bi-check"></i>
-                                    <span>{{ $ctalist->content }}</span>
-                                </li>
+                                @foreach ($ctalists as $ctalist)
+                                    <li>
+                                        <i class="bi bi-check"></i>
+                                        <span>{{ $ctalist->content }}</span>
+                                    </li>
                                 @endforeach
                             </ul>
 
@@ -608,7 +619,7 @@
                 </div>
 
             </div>
-<a href="{{route('editHomeCta')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeCta') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Call To Action Section -->
 
         <!-- Faq Section -->
@@ -622,13 +633,13 @@
                         <h2><strong>{{ $faqs[0]->title }}</strong></h2>
                         <div class="faq-container">
                             @foreach ($faqs->skip(1) as $faq)
-                            <div class="faq-item">
-                                <h3>{{$faq->title}}</h3>
-                                <div class="faq-content">
-                                    <p>{{$faq->description}}</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                                <div class="faq-item">
+                                    <h3>{{ $faq->title }}</h3>
+                                    <div class="faq-content">
+                                        <p>{{ $faq->description }}</p>
+                                    </div>
+                                    <i class="faq-toggle bi bi-chevron-right"></i>
+                                </div><!-- End Faq item-->
                             @endforeach
 
 
@@ -639,7 +650,7 @@
                 </div>
 
             </div>
-<a href="{{route('editHomeFaq')}}" class="btn-primary">Edit Konten</a>
+            <a href="{{ route('editHomeFaq') }}" class="btn-primary">Edit Konten</a>
         </section><!-- /Faq Section -->
 
         <footer id="footer" class="footer position-relative footer-background">

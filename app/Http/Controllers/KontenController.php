@@ -67,7 +67,7 @@ class KontenController extends Controller
     public function showHomeFaqForm()
     {
         $faqs = Faq::all();
-        $title = "Edit Konten Home Hero";
+        $title = "Edit FAQ";
         return view('edit.home.faq', compact('title', 'faqs'));
     }
     public function statsShow(Stats $stats)
@@ -130,7 +130,7 @@ private function updateStats(Request $request)
     }
 }
 
-    public function updateHomeServices(Request $request)
+public function updateHomeServices(Request $request)
 {
     // kalau ada input hero → jalankan update hero
     if ($request->has('services')) {
@@ -472,8 +472,6 @@ public function updateHomeCta(Request $request)
     $this->updateCtasImg($request);
 }
 
-
-
     return redirect()->route('admin')->with('success', 'CTA berhasil diperbarui');
 }
 
@@ -486,6 +484,7 @@ private function updateCtas(Request $request)
         }
     }
 }
+
 
 private function updateCtaList(Request $request)
 {
@@ -517,21 +516,77 @@ private function updateCtaList(Request $request)
     }
 }
 
-private function updateCtasImg(Request $request, $id)
+private function updateCtasImg(Request $request)
 {
-    $cta = Cta::find($id);
-    if ($cta && $request->hasFile('img_cta_visual')) {
-        $file = $request->file('img_cta_visual');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('assets/img/misc'), $filename);
+    // misalnya kamu tahu id yang dipakai 5
+    $cta = Cta::find( $request->input('img_3_id', 3)); // bisa juga hardcode kalau fix id=5
+    if ($cta) {
+        if ($request->hasFile("img_{$cta->id}_visual")) {
+            $file = $request->file("img_{$cta->id}_visual");
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/img/misc'), $filename);
 
-        if ($cta->content && file_exists(public_path('assets/img/misc/' . $cta->content))) {
-            unlink(public_path('assets/img/misc/' . $cta->content));
+            // hapus file lama kalau ada
+            if ($cta->content && file_exists(public_path('assets/img/misc/' . $cta->content))) {
+                unlink(public_path('assets/img/misc/' . $cta->content));
+            }
+
+            $cta->update([
+                'content' => $filename,
+            ]);
         }
+    }
+}
 
-        $cta->update([
-            'content' => $filename,
-        ]);
+public function updateHomeFaqs(Request $request)
+{
+    // kalau ada input hero → jalankan update hero
+    if ($request->has('heroes')) {
+        $this->updateHeroes($request);
+    }
+
+    // kalau ada input stats → jalankan update stats
+    if ($request->has('stats')) {
+        $this->updateStats($request);
+    }
+
+    // kalau ada input faqs → jalankan update faq
+    if ($request->has('faqs')) {
+        $this->updateFaqs($request);
+    }
+
+    return redirect()->route('admin')->with('success', 'Konten berhasil diperbarui');
+}
+
+private function updateFaqs(Request $request)
+{
+    $faqs = $request->input('faqs', []);
+
+    foreach ($faqs as $faqData) {
+        if (isset($faqData['id'])) {
+            // update data lama
+            $faq = Faq::find($faqData['id']);
+            if ($faq) {
+                $faq->update([
+                    'title'       => $faqData['title'],
+                    'description' => $faqData['description'],
+                ]);
+            }
+        } else {
+            // insert data baru
+            Faq::create([
+                'title'       => $faqData['title'],
+                'description' => $faqData['description'],
+            ]);
+        }
+    }
+
+    // hapus FAQ
+    foreach ($request->input('deleteFaqs', []) as $id) {
+        $faq = Faq::find($id);
+        if ($faq) {
+            $faq->delete();
+        }
     }
 }
 

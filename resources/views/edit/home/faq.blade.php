@@ -69,38 +69,51 @@
                         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
                             <div class="card-body p-4 p-lg-5">
 
-                                <form action="{{ route('postLogin') }}" method="post" class="php-email-form"
+                                <form action="{{ route('updateHomeFaqs') }}" method="post" class="php-email-form"
                                     data-aos="fade-up" data-aos-delay="600">
                                     @csrf
                                     <div class="row gy-4">
 
-                    <div class="col-12">
-                      <p>Edit Faq Title</p>
-                      <input type="text" value="{{ $faqs[0]->title }}" name="HomeFaqTitle" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
-                    </div>
-                    @foreach ($faqs->skip(1) as $faq)
-                     <div class="col-12 ">
-                      <p>Edit Faq Item</p>
-                      <input type="text" value="{{ $faq->title }}" class="form-control" name="homeFaqItem" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
-                    </div>
+                                        <div class="col-12">
+                                            <p>Edit Faq Title</p>
+                                            <input type="text" value="{{ $faqs[0]->title }}" name="faqs[0][title]"
+                                                class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026"
+                                                required>
+                                            <input type="hidden" name="faqs[0][id]" value="{{ $faqs[0]->id }}">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Faq Content</p>
-                      <textarea type="text" class="form-control" name="homeFaqContent" placeholder="2200+" required="">{{ $faq->description }}</textarea>
-                      <button class="hapusStats btn btn-danger ">Hapus</button>
-                    </div>
-                    @endforeach
-                    <div class="tambahan"></div>
-                    <div class="col-12 ">  
-                      <button class="tambahStats btn-add" >Tambah Content <i class="bi bi-plus-circle"></i></button>
-                    </div>
+                                        @foreach ($faqs->skip(1) as $faq)
+                                            <div class="stat-item">
+                                                <input type="hidden" name="faqs[{{ $loop->index }}][id]"
+                                                    value="{{ $faq->id }}">
+                                                <div class="col-12">
+                                                    <p>Edit Faq Item</p>
+                                                    <input type="text" value="{{ $faq->title }}"
+                                                        class="form-control" name="faqs[{{ $loop->index }}][title]"
+                                                        placeholder="Judul FAQ" required>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p>Edit Faq Content</p>
+                                                    <textarea class="form-control" name="faqs[{{ $loop->index }}][description]" placeholder="Isi jawaban FAQ" required>{{ $faq->description }}</textarea>
+                                                    <button class="hapusStats btn btn-danger">Hapus</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <div class="tambahan"></div>
+
+                                        <div class="col-12">
+                                            <button class="tambahStats btn-add">Tambah FAQ <i
+                                                    class="bi bi-plus-circle"></i></button>
+                                        </div>
 
                                         <div class="col-12 text-center">
                                             <div class="loading">Loading</div>
                                             <div class="error-message"></div>
                                             <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                                            <button type="submit" class="btn btn-submit w-100">Masuk</button>
+                                            <button type="submit" class="btn btn-submit w-100">Simpan</button>
                                         </div>
 
                                     </div>
@@ -133,44 +146,58 @@
     <!-- Main JS File -->
     <script src="/assets/js/main.js"></script>
 
-     <script>
-                       const tambahStats = document.querySelector(".tambahStats");
-                          tambahStats.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            let tambahanContainer = document.querySelector(".tambahan");
-                            let tambahanHTML = "";
-                              tambahanHTML += `
-                              <div class="stat-item">
-                                   <div class="col-12 ">
-                      <p>Edit Faq Item</p>
-                      <input type="text" class="form-control" name="homeFaqItem" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">
-                    </div>
+    <script>
+        const tambahStats = document.querySelector(".tambahStats");
+        tambahStats.addEventListener("click", (e) => {
+            e.preventDefault();
+            let tambahanContainer = document.querySelector(".tambahan");
+            let index = document.querySelectorAll(".stat-item").length + 1; // skip title
 
-                    <div class="col-12 ">
-                      <p>Edit Faq Content</p>
-                      <textarea type="text" class="form-control" name="homeFaqContent" placeholder="2200+" required=""></textarea>
-                      <button class="hapusStats btn btn-danger ">Hapus</button>
-                    </div> 
-                    </div> `;
-                               tambahanContainer.innerHTML += tambahanHTML;
-                          });
-                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
-                          hapusStatsButtons.forEach(button => {
-                            button.addEventListener("click", (e) => {
-                              e.preventDefault();
-                              let secondDiv = button.parentElement; // div tempat tombol hapus
-    let firstDiv = secondDiv.previousElementSibling; 
-                              if (firstDiv) firstDiv.remove();
-    secondDiv.remove();
-                            });
-                          });
-                          document.addEventListener("click", function(e) {
-  if (e.target.classList.contains("hapusStats")) {
-    e.preventDefault();
-    e.target.closest(".stat-item").remove();
-  }
-});
-                    </script>
+            let tambahanHTML = `
+        <div class="stat-item">
+            <div class="col-12">
+                <p>Edit Faq Item</p>
+                <input type="text" class="form-control" 
+                       name="faqs[${index}][title]" 
+                       placeholder="Judul FAQ" required>
+            </div>
+
+            <div class="col-12">
+                <p>Edit Faq Content</p>
+                <textarea class="form-control" 
+                          name="faqs[${index}][description]" 
+                          placeholder="Isi jawaban FAQ" required></textarea>
+                <button class="hapusStats btn btn-danger">Hapus</button>
+            </div>
+        </div>`;
+            tambahanContainer.innerHTML += tambahanHTML;
+        });
+
+        // handle hapus
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("hapusStats")) {
+                e.preventDefault();
+
+                let statItem = e.target.closest(".stat-item");
+                let statIdInput = statItem.querySelector("input[name*='[id]']");
+
+                // kalau ini FAQ lama dari DB → tambahin hidden input deleteFaqs[]
+                if (statIdInput) {
+                    let deletedId = statIdInput.value;
+                    let form = statItem.closest("form");
+
+                    let hiddenInput = document.createElement("input");
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "deleteFaqs[]";
+                    hiddenInput.value = deletedId;
+                    form.appendChild(hiddenInput);
+                }
+
+                // hapus dari DOM
+                statItem.remove();
+            }
+        });
+    </script>
 
 </body>
 

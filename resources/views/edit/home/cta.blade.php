@@ -74,40 +74,48 @@
                                     @csrf
                                     <div class="row gy-4">
 
-                    <div class="col-12">
-                      <p>Edit CTA Title</p>
-                      <input type="hidden" name="ctas[0][id]" value="{{ $ctas[0]->id }}">
-                      <input type="text" value="{{ $ctas[0]->content }}" name="ctas[0][content]" class="form-control" placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
-                    </div>
+                                        <div class="col-12">
+                                            <p>Edit CTA Title</p>
+                                            <input type="hidden" name="ctas[0][id]" value="{{ $ctas[0]->id }}">
+                                            <input type="text" value="{{ $ctas[0]->content }}"
+                                                name="ctas[0][content]" class="form-control"
+                                                placeholder="Penerimaan Mahasiswa Baru 2025/2026" required="">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Cta Description</p>
-                      <input type="hidden" name="ctas[1][id]" value="{{ $ctas[1]->id }}">
-                      <textarea type="text" class="form-control" name="ctas[1][content]" placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
-                    </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Cta Description</p>
+                                            <input type="hidden" name="ctas[1][id]" value="{{ $ctas[1]->id }}">
+                                            <textarea type="text" class="form-control" name="ctas[1][content]"
+                                                placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <p>Edit Cta Image</p>
+                                            <input type="file"
+                                                value="{{ asset('/assets/img/misc/' . $ctas[2]
+                                                ->content) }}"
+                                                class="form-control" name="img_{{ $ctas[2]->id }}_visual"
+                                                placeholder="CTA Image">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Cta Image</p>
-                      <input type="hidden" name="img_cta_id" value="{{ $ctas[2]->id }}">
-<input type="file" name="img_{{ $ctas[2]->id }}_visual">
-
-<img src="{{ asset('/assets/img/misc/' . $ctas[2]->content) }}" width="150">
-
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Cta List</p>
-                       </div>
-                    @foreach ($ctalists as $ctalist)     
-                    <div class="stat-item"> 
-                      <input type="hidden" name="ctalist[{{ $loop->index }}][id]" value="{{ $ctalist->id }}">
-                      <input type="text" value="{{ $ctalist->content }}" class="form-control" name="ctalist[{{ $loop->index }}][content]" placeholder="List" required="">
-                      <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
-                    </div>
-                    @endforeach
-                    <div class="tambahan"></div>
-                    <div class="col-12 ">  
-                      <button class="tambahStats btn-add" >Tambah List  <i class="bi bi-plus-circle"></i></button>
-                    </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Cta List</p>
+                                        </div>
+                                        @foreach ($ctalists as $ctalist)
+                                            <div class="stat-item">
+                                                <input type="hidden" name="ctalist[{{ $loop->index }}][id]"
+                                                    value="{{ $ctalist->id }}">
+                                                <input type="text" value="{{ $ctalist->content }}"
+                                                    class="form-control" name="ctalist[{{ $loop->index }}][content]"
+                                                    placeholder="List" required="">
+                                                <div class="col-12"><button
+                                                        class="hapusStats btn btn-danger ">Hapus</button></div>
+                                            </div>
+                                        @endforeach
+                                        <div class="tambahan"></div>
+                                        <div class="col-12 ">
+                                            <button class="tambahStats btn-add">Tambah List <i
+                                                    class="bi bi-plus-circle"></i></button>
+                                        </div>
 
                                         <div class="col-12 text-center">
                                             <div class="loading">Loading</div>
@@ -148,44 +156,44 @@
     <script src="/assets/js/main.js"></script>
 
     <script>
-                       const tambahStats = document.querySelector(".tambahStats");
-                          tambahStats.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            let tambahanContainer = document.querySelector(".tambahan");
-                             let index = document.querySelectorAll(".stat-item").length;
-                            let tambahanHTML = "";
-                              tambahanHTML += `
+        const tambahStats = document.querySelector(".tambahStats");
+        tambahStats.addEventListener("click", (e) => {
+            e.preventDefault();
+            let tambahanContainer = document.querySelector(".tambahan");
+            let index = document.querySelectorAll(".stat-item").length;
+            let tambahanHTML = "";
+            tambahanHTML += `
                               <div class="stat-item">
                                     <input type="text" class="form-control" name="ctalist[${index}][content]" placeholder="List" required="">
                       <div class="col-12"><button class="hapusStats btn btn-danger ">Hapus</button></div>
                        </div> `;
-                               tambahanContainer.innerHTML += tambahanHTML;
-                          });
-                          document.addEventListener("click", function(e) {
-  if (e.target.classList.contains("hapusStats")) {
-    e.preventDefault();
+            tambahanContainer.innerHTML += tambahanHTML;
+        });
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("hapusStats")) {
+                e.preventDefault();
 
-    // cari stat-item yang mau dihapus
-    let statItem = e.target.closest(".stat-item");
-    let statIdInput = statItem.querySelector("input[name*='[id]']");
+                // cari stat-item yang mau dihapus
+                let statItem = e.target.closest(".stat-item");
+                let statIdInput = statItem.querySelector("input[name*='[id]']");
 
-    // kalau field ini dari database → tambahin hidden input deleteStats[]
-    if (statIdInput) {
-      let deletedId = statIdInput.value;
-      let form = statItem.closest("form");
+                // kalau field ini dari database → tambahin hidden input deleteStats[]
+                if (statIdInput) {
+                    let deletedId = statIdInput.value;
+                    let form = statItem.closest("form");
 
-      let hiddenInput = document.createElement("input");
-      hiddenInput.type = "hidden";
-      hiddenInput.name = "deleteStats[]";
-      hiddenInput.value = deletedId;
-      form.appendChild(hiddenInput);
-    }
+                    let hiddenInput = document.createElement("input");
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "deleteStats[]";
+                    hiddenInput.value = deletedId;
+                    form.appendChild(hiddenInput);
+                }
 
-    // hapus field dari DOM
-    statItem.remove();
-  }
-});
-                    </script>
+                // hapus field dari DOM
+                statItem.remove();
+            }
+        });
+    </script>
 
 </body>
 

@@ -74,42 +74,55 @@
                                     @csrf
                                     <div class="row gy-4">
 
-                    <div class="col-12">
-                      <p>Edit Stats Main Heading</p>
-                      <input type="hidden" name="statelemens[0][id]" value="{{ $statelemens[0]->id }}">
-                      <input type="text" value="{{ $statelemens[0]->content }}" name="statelemens[0][content]" class="form-control" placeholder="Mari Bergabung" required="">
-                    </div>
+                                        <div class="col-12">
+                                            <p>Edit Stats Main Heading</p>
+                                            <input type="hidden" name="statelemens[0][id]"
+                                                value="{{ $statelemens[0]->id }}">
+                                            <input type="text" value="{{ $statelemens[0]->content }}"
+                                                name="statelemens[0][content]" class="form-control"
+                                                placeholder="Mari Bergabung" required="">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Stats Main Description</p>
-                       <input type="hidden" name="statelemens[1][id]" value="{{ $statelemens[1]->id }}">
-                      <input type="text" value="{{ $statelemens[1]->content }}" class="form-control" name="statelemens[1][content]" placeholder="Mari bergabung dengan mahasiswa yang bangga berkuliah di br STISIPOL
-                            Raja Haji Tanjungpinang." required="">
-                    </div>
-                    @foreach ( $stats as $stat)
-                    <div class="stat-item">
-                      <input type="hidden" name="stats[{{ $loop->index }}][id]" value="{{ $stat->id }}">
-                    <div class="col-12 ">
-                      <p>Edit Stats Stat Number</p>
-                      <input type="text" value="{{ $stat->number }}" class="form-control" name="stats[{{ $loop->index }}][number]" placeholder="0000+" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <input type="text" value="{{ $stat->label }}" class="form-control" name="stats[{{ $loop->index }}][label]" placeholder="label" required="">
-                      <button class="hapusStats btn btn-danger ">Hapus</button>
-                    </div>
-                    </div>
-                    @endforeach
+                                        <div class="col-12 ">
+                                            <p>Edit Stats Main Description</p>
+                                            <input type="hidden" name="statelemens[1][id]"
+                                                value="{{ $statelemens[1]->id }}">
+                                            <input type="text" value="{{ $statelemens[1]->content }}"
+                                                class="form-control" name="statelemens[1][content]"
+                                                placeholder="Mari bergabung dengan mahasiswa yang bangga berkuliah di br STISIPOL
+                            Raja Haji Tanjungpinang."
+                                                required="">
+                                        </div>
+                                        @foreach ($stats as $stat)
+                                            <div class="stat-item">
+                                                <input type="hidden" name="stats[{{ $loop->index }}][id]"
+                                                    value="{{ $stat->id }}">
+                                                <div class="col-12 ">
+                                                    <p>Edit Stats Stat Number</p>
+                                                    <input type="text" value="{{ $stat->number }}"
+                                                        class="form-control" name="stats[{{ $loop->index }}][number]"
+                                                        placeholder="0000+" required="">
+                                                </div>
+                                                <div class="col-12 ">
+                                                    <input type="text" value="{{ $stat->label }}"
+                                                        class="form-control" name="stats[{{ $loop->index }}][label]"
+                                                        placeholder="label" required="">
+                                                    <button class="hapusStats btn btn-danger ">Hapus</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
 
-                    <div class="tambahan"></div>
-                    <div class="col-12 ">  
-                      <button class="tambahStats btn-add" >Tambah Stat <i class="bi bi-plus-circle"></i></button>
-                    </div>
+                                        <div class="tambahan"></div>
+                                        <div class="col-12 ">
+                                            <button class="tambahStats btn-add">Tambah Stat <i
+                                                    class="bi bi-plus-circle"></i></button>
+                                        </div>
 
-                    
-                    <div class="col-12 text-center">
-                      <div class="loading">Loading</div>
-                      <div class="error-message"></div>
-                      <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                        <div class="col-12 text-center">
+                                            <div class="loading">Loading</div>
+                                            <div class="error-message"></div>
+                                            <div class="sent-message">Your message has been sent. Thank you!</div>
 
                                             <button type="submit" class="btn btn-submit w-100">Masuk</button>
                                         </div>
@@ -145,13 +158,13 @@
     <script src="/assets/js/main.js"></script>
 
     <script>
-                       const tambahStats = document.querySelector(".tambahStats");
-                          tambahStats.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            let tambahanContainer = document.querySelector(".tambahan");
-                             let index = document.querySelectorAll(".stat-item").length;
-                            let tambahanHTML = "";
-                              tambahanHTML += `
+        const tambahStats = document.querySelector(".tambahStats");
+        tambahStats.addEventListener("click", (e) => {
+            e.preventDefault();
+            let tambahanContainer = document.querySelector(".tambahan");
+            let index = document.querySelectorAll(".stat-item").length;
+            let tambahanHTML = "";
+            tambahanHTML += `
                               <div class="stat-item">
                                     <div class="col-12">
                       <p>Edit Stats Stat Number</p>
@@ -162,25 +175,25 @@
                       <button class="hapusStats btn btn-danger ">Hapus</button>
                     </div> 
                     </div> `;
-                               tambahanContainer.innerHTML += tambahanHTML;
-                          });
-                          const hapusStatsButtons = document.querySelectorAll(".hapusStats");
-                          hapusStatsButtons.forEach(button => {
-                            button.addEventListener("click", (e) => {
-                              e.preventDefault();
-                              let secondDiv = button.parentElement; // div tempat tombol hapus
-    let firstDiv = secondDiv.previousElementSibling; 
-                              if (firstDiv) firstDiv.remove();
-    secondDiv.remove();
-                            });
-                          });
-                          document.addEventListener("click", function(e) {
-  if (e.target.classList.contains("hapusStats")) {
-    e.preventDefault();
-    e.target.closest(".stat-item").remove();
-  }
-});
-                    </script>
+            tambahanContainer.innerHTML += tambahanHTML;
+        });
+        const hapusStatsButtons = document.querySelectorAll(".hapusStats");
+        hapusStatsButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                let secondDiv = button.parentElement; // div tempat tombol hapus
+                let firstDiv = secondDiv.previousElementSibling;
+                if (firstDiv) firstDiv.remove();
+                secondDiv.remove();
+            });
+        });
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("hapusStats")) {
+                e.preventDefault();
+                e.target.closest(".stat-item").remove();
+            }
+        });
+    </script>
 
 </body>
 

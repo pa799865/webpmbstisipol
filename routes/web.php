@@ -31,6 +31,9 @@ Route::middleware(['auth'])->group(function () {
     ->name('updateHomePricing');
     Route::post('/edit/home/cta/update', [KontenController::class, 'updateHomeCta'])
     ->name('updateHomeCta');
+    Route::post('/edit/home/faq/update', [KontenController::class, 'updateHomeFaqs'])
+    ->name('updateHomeFaqs');
+
     // Route::post('/tickets/{ticket}/responses', [ResponseController::class,'store'])->name('responses.store');
     // Route::middleware(['cekrole:admin'])->group(function () {
     //     Route::post('/tickets/{ticket}/update-status', [TicketController::class,'updateStatus'])->name('tickets.updateStatus');

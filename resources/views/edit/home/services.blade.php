@@ -74,59 +74,81 @@
                                     @csrf
                                     <div class="row gy-4">
 
-                    <div class="col-12">
-                      <p>Edit Services Description Title</p>
-                      <input type="hidden" name="services[0][id]" value="{{ $services[0]->id }}">
-                      <input type="text" value="{{ $services[0]->content }}" name="services[0][content]" class="form-control" placeholder="Keunggulan Kami" required="">
-                    </div>
+                                        <div class="col-12">
+                                            <p>Edit Services Description Title</p>
+                                            <input type="hidden" name="services[0][id]" value="{{ $services[0]->id }}">
+                                            <input type="text" value="{{ $services[0]->content }}"
+                                                name="services[0][content]" class="form-control"
+                                                placeholder="Keunggulan Kami" required="">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Services Title</p>
-                       <input type="hidden" name="services[1][id]" value="{{ $services[1]->id }}">
-                      <input type="text" value="{{ $services[1]->content }}" class="form-control" name="services[1][content]" placeholder="Keunggulan Kami" required="">
-                    </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Services Title</p>
+                                            <input type="hidden" name="services[1][id]" value="{{ $services[1]->id }}">
+                                            <input type="text" value="{{ $services[1]->content }}"
+                                                class="form-control" name="services[1][content]"
+                                                placeholder="Keunggulan Kami" required="">
+                                        </div>
 
-                    <div class="col-12 ">
-                      <p>Edit Services Section Badge</p>
-                      <input type="hidden" name="services[2][id]" value="{{ $services[2]->id }}">
-                      <input type="text" value="{{ $services[2]->content }}" class="form-control" name="services[2][content]" placeholder="Tentang Kami" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Services Section Heading </p>
-                      <input type="hidden" name="services[3][id]" value="{{ $services[3]->id }}">
-                      <input type="text" value="{{ $services[3]->content }}" class="form-control" name="services[3][content]" placeholder="Keunggulan Kami" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Services Section Description</p>
-                      <input type="hidden" name="services[4][id]" value="{{ $services[4]->id }}">
-                      <input type="text" value="{{ $services[4]->content }}" class="form-control" name="services[4][content]" placeholder="Kampus STISIPOL Raja Haji Tanjungpinang di lokasi strategi serta Berkualitas, Biaya Terjangkau, Beasiswa Tersedia, Inovatif & Berorientasi Sosial." required="">
-                    </div>
-                    <div class="col-12 ">
-                      <p>Edit Services Visual</p>
-                      <input type="file" value="{{ asset('/assets/img/services/' . $services[5]->content) }}" class="form-control" name="img_{{ $services[5]->id }}_visual" placeholder="Mahasiswa Aktif" >
-                    </div>
-                    @foreach ( $servicescards as $servicescard )
-                    <div class="stat-item">
-                      <input type="hidden" name="servicescard[{{ $loop->index }}][id]" value="{{ $servicescard->id }}">
-                    <div class="col-12 ">
-                      <p>Edit Service Card Content</p>
-                      <input type="text" value="{{ $servicescard->title }}" class="form-control" name="servicescard[{{ $loop->index }}][title]" placeholder="Biaya Terjangkau" required="">
-                    </div>
-                    <div class="col-12 ">
-                      <textarea type="text"  class="form-control" name="servicescard[{{ $loop->index }}][description]" placeholder="Kuliah di STISIPOL Raja Haji Tanjungpinang, biaya terjangkau, kualitas terjaga!!! Solusi Pendidikan berkualitas tanpa beban financial." required=""> {{ $servicescard->description }}</textarea>
-                      <button class="hapusStats btn btn-danger ">Hapus</button>
-                    </div>
-                    </div>
-                    @endforeach
-                    <div class="tambahan"></div>
-                    <div class="col-12 ">  
-                      <button class="tambahStats btn-add" >Tambah Card <i class="bi bi-plus-circle"></i></button>
-                    </div>
-                    
-                    <div class="col-12 text-center">
-                      <div class="loading">Loading</div>
-                      <div class="error-message"></div>
-                      <div class="sent-message">Your message has been sent. Thank you!</div>
+                                        <div class="col-12 ">
+                                            <p>Edit Services Section Badge</p>
+                                            <input type="hidden" name="services[2][id]" value="{{ $services[2]->id }}">
+                                            <input type="text" value="{{ $services[2]->content }}"
+                                                class="form-control" name="services[2][content]"
+                                                placeholder="Tentang Kami" required="">
+                                        </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Services Section Heading </p>
+                                            <input type="hidden" name="services[3][id]" value="{{ $services[3]->id }}">
+                                            <input type="text" value="{{ $services[3]->content }}"
+                                                class="form-control" name="services[3][content]"
+                                                placeholder="Keunggulan Kami" required="">
+                                        </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Services Section Description</p>
+                                            <input type="hidden" name="services[4][id]"
+                                                value="{{ $services[4]->id }}">
+                                            <input type="text" value="{{ $services[4]->content }}"
+                                                class="form-control" name="services[4][content]"
+                                                placeholder="Kampus STISIPOL Raja Haji Tanjungpinang di lokasi strategi serta Berkualitas, Biaya Terjangkau, Beasiswa Tersedia, Inovatif & Berorientasi Sosial."
+                                                required="">
+                                        </div>
+                                        <div class="col-12 ">
+                                            <p>Edit Services Visual</p>
+                                            <input type="file"
+                                                value="{{ asset('/assets/img/services/' . $services[5]->content) }}"
+                                                class="form-control" name="img_{{ $services[5]->id }}_visual"
+                                                placeholder="Mahasiswa Aktif">
+                                        </div>
+                                        @foreach ($servicescards as $servicescard)
+                                            <div class="stat-item">
+                                                <input type="hidden" name="servicescard[{{ $loop->index }}][id]"
+                                                    value="{{ $servicescard->id }}">
+                                                <div class="col-12 ">
+                                                    <p>Edit Service Card Content</p>
+                                                    <input type="text" value="{{ $servicescard->title }}"
+                                                        class="form-control"
+                                                        name="servicescard[{{ $loop->index }}][title]"
+                                                        placeholder="Biaya Terjangkau" required="">
+                                                </div>
+                                                <div class="col-12 ">
+                                                    <textarea type="text" class="form-control" name="servicescard[{{ $loop->index }}][description]"
+                                                        placeholder="Kuliah di STISIPOL Raja Haji Tanjungpinang, biaya terjangkau, kualitas terjaga!!! Solusi Pendidikan berkualitas tanpa beban financial."
+                                                        required=""> {{ $servicescard->description }}</textarea>
+                                                    <button class="hapusStats btn btn-danger ">Hapus</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="tambahan"></div>
+                                        <div class="col-12 ">
+                                            <button class="tambahStats btn-add">Tambah Card <i
+                                                    class="bi bi-plus-circle"></i></button>
+                                        </div>
+
+                                        <div class="col-12 text-center">
+                                            <div class="loading">Loading</div>
+                                            <div class="error-message"></div>
+                                            <div class="sent-message">Your message has been sent. Thank you!</div>
 
                                             <button type="submit" class="btn btn-submit w-100">Masuk</button>
                                         </div>
@@ -162,13 +184,13 @@
     <script src="/assets/js/main.js"></script>
 
     <script>
-                       const tambahStats = document.querySelector(".tambahStats");
-                          tambahStats.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            let tambahanContainer = document.querySelector(".tambahan");
-                            let index = document.querySelectorAll(".stat-item").length;
-                            let tambahanHTML = "";
-                              tambahanHTML += `
+        const tambahStats = document.querySelector(".tambahStats");
+        tambahStats.addEventListener("click", (e) => {
+            e.preventDefault();
+            let tambahanContainer = document.querySelector(".tambahan");
+            let index = document.querySelectorAll(".stat-item").length;
+            let tambahanHTML = "";
+            tambahanHTML += `
                               <div class="stat-item">
                                     <div class="col-12 ">
                       <p>Edit Service Card Content</p>
@@ -180,33 +202,33 @@
                     </div>
                     </div>
                                   `;
-                               tambahanContainer.innerHTML += tambahanHTML;
-                          });
-                          document.addEventListener("click", function(e) {
-  if (e.target.classList.contains("hapusStats")) {
-    e.preventDefault();
+            tambahanContainer.innerHTML += tambahanHTML;
+        });
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("hapusStats")) {
+                e.preventDefault();
 
-    // cari stat-item yang mau dihapus
-    let statItem = e.target.closest(".stat-item");
-    let statIdInput = statItem.querySelector("input[name*='[id]']");
+                // cari stat-item yang mau dihapus
+                let statItem = e.target.closest(".stat-item");
+                let statIdInput = statItem.querySelector("input[name*='[id]']");
 
-    // kalau field ini dari database → tambahin hidden input deleteStats[]
-    if (statIdInput) {
-      let deletedId = statIdInput.value;
-      let form = statItem.closest("form");
+                // kalau field ini dari database → tambahin hidden input deleteStats[]
+                if (statIdInput) {
+                    let deletedId = statIdInput.value;
+                    let form = statItem.closest("form");
 
-      let hiddenInput = document.createElement("input");
-      hiddenInput.type = "hidden";
-      hiddenInput.name = "deleteStats[]";
-      hiddenInput.value = deletedId;
-      form.appendChild(hiddenInput);
-    }
+                    let hiddenInput = document.createElement("input");
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "deleteStats[]";
+                    hiddenInput.value = deletedId;
+                    form.appendChild(hiddenInput);
+                }
 
-    // hapus field dari DOM
-    statItem.remove();
-  }
-});
-                    </script>
+                // hapus field dari DOM
+                statItem.remove();
+            }
+        });
+    </script>
 
 </body>
 
