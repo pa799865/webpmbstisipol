@@ -18,9 +18,15 @@ use Illuminate\Http\Request;
 use App\Models\Programstudyitem;
 use App\Models\Programstudycontent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User; 
 
 class AuthController extends Controller
 {
+    public function showRegisterForm() {
+        $title = 'Register';
+        return view('auth.register', compact('title'));
+    }
     public function showLoginForm() {
         $title = 'Login';
         return view('auth.login', compact('title'));
@@ -50,5 +56,18 @@ class AuthController extends Controller
             return redirect()->route('admin')->with('success','Login Berhasil!');
         }
         return back()->withErrors(['username' => 'Username atau Password']);
+    }
+    public function register(Request $request) {
+        $request->validate([
+            'username' => 'required|unique:users,username',
+            'password' => 'required|min:6',
+        ]);
+
+        User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+        
+        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
     }
 }
