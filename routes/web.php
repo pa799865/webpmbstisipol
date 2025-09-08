@@ -8,6 +8,8 @@ use App\Http\Controllers\AuthController;
 Route::get('/', [AuthController::class,'showIndex'])->name('index');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('login');
 Route::post('/postLogin', [AuthController::class,'login'])->name('postLogin');
+Route::get('/register', [AuthController::class,'showRegisterForm'])->name('register');
+Route::post('/postRegister', [AuthController::class,'register'])->name('postRegister');
 Route::middleware(['auth'])->group(function () {
     Route::post('logout', [AuthController::class,'logout'])->name('logout');
     Route::resource('admin', AdminController::class);
