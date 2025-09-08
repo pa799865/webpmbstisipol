@@ -175,7 +175,7 @@
                                             <div class="error-message"></div>
                                             <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                                            <button type="submit" class="btn btn-submit w-100 mt-4">Masuk</button>
+                                            <button type="submit" class="btn btn-submit w-100 mt-4">Simpan</button>
                                         </div>
 
                                     </div>

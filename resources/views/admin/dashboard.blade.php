@@ -651,6 +651,11 @@
 
             </div>
             <a href="{{ route('editHomeFaq') }}" class="btn-primary">Edit Konten</a>
+            <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn-primary">Logout</button>
+        </form>
+
         </section><!-- /Faq Section -->
 
         <footer id="footer" class="footer position-relative footer-background">
@@ -677,10 +682,9 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Fasilitas</a></li>
+                            <li><a href="#">Biaya Kuliah</a></li>
+                            <li><a href="#">Download</a></li>
                         </ul>
                     </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cta;
 use App\Models\Faq;
 use App\Models\Hero;
+use App\Models\User;
 use App\Models\Stats;
 use App\Models\Ctalist;
 use App\Models\Pricing;
@@ -50,5 +51,11 @@ class AuthController extends Controller
             return redirect()->route('admin')->with('success','Login Berhasil!');
         }
         return back()->withErrors(['username' => 'Username atau Password']);
+    }
+    public function logout(Request $request)  {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login')->with('success','Logout Berhasil!');
     }
 }

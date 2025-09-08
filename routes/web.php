@@ -9,7 +9,7 @@ Route::get('/', [AuthController::class,'showIndex'])->name('index');
 Route::get('/login', [AuthController::class,'showLoginForm'])->name('login');
 Route::post('/postLogin', [AuthController::class,'login'])->name('postLogin');
 Route::middleware(['auth'])->group(function () {
-    // Route::post('logout', [AuthController::class,'logout'])->name('logout');
+    Route::post('logout', [AuthController::class,'logout'])->name('logout');
     Route::resource('admin', AdminController::class);
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/edit/home/hero', [KontenController::class,'showHomeHeroForm'])->name('editHomeHero');
