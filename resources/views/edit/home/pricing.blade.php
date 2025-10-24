@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login - Admin PMB SITISIPOL Raja Haji</title>
+    <title>Pricing - Admin PMB SITISIPOL Raja Haji</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="col-12 ">
                                                     <textarea type="text" class="form-control" name="pricingcard[{{ $loop->index }}][description]"
-                                                        placeholder="3.453" required="">{{ $pricingcard->description }}</textarea>
+                                                        placeholder="3.453">{{ $pricingcard->description }}</textarea>
                                                 </div>
                                                 <div class="col-12 ">
                                                     <input type="text" value="{{ $pricingcard->price }}"
@@ -241,7 +241,7 @@
             let index = document.querySelectorAll(".stat-items2").length;
             let tambahanHTML1 = "";
             tambahanHTML1 += ` <div class="stat-items2">
-                                <input type="hidden" name="listbiasa[${index}][id]" value="{{ $listbiasa->id }}">
+                                <input type="hidden" name="listbiasa[${index}][id]">
                                     <input type="text" class="form-control mt-3" name="listbiasa[${index}][content]" placeholder="List Common" >
                       <button class="hapusStats1 btn btn-danger ">Hapus</button>
                        </div> 
@@ -259,7 +259,7 @@
 
             tambahanHTML2 += `
                               <div class="stat-items3">
-                                <input type="hidden" name="listspecial[${index}][id]" value="{{ $listspecial->id }}">
+                                <input type="hidden" name="listspecial[${index}][id]">
                                    <input type="text" class="form-control mt-3" name="listspecial[${index}][content]" placeholder="List Spesial" >
                       <button class="hapusStats2 btn btn-danger ">Hapus</button>
                        </div> `;
@@ -283,17 +283,17 @@
                       <input type="text" class="form-control" name="pricingcard[${index}][title]" placeholder="Kelas Reguler" required="">
                     </div>
                     <div class="col-12 ">
-                      <textarea type="text"  class="form-control" name="pricingcard[${index}][description]" placeholder="3.453" required=""></textarea>
+                      <textarea type="text" class="form-control" name="pricingcard[${index}][description]" placeholder="description"></textarea>
                     </div>
                     <div class="col-12 ">
-                      <input type="text" class="form-control" name="pricingcard[${index}][price]" placeholder="/Semester" required="">
+                      <input type="text" class="form-control" name="pricingcard[${index}][price]" placeholder="price" required="">
                     </div>
                     <div class="col-12 ">
                       <input type="text" class="form-control" name="pricingcard[${index}][period]" placeholder="/Semester" required="">
                     </div>
                     <div class="col-12 d-flex justify-content-between align-items-center ">
                         <label for="">
-                           <input type="hidden" name="pricingcard[[${index}][tipe]" value="">
+                           <input type="hidden" name="pricingcard[${index}][tipe]" value="">
                       <input type="checkbox" value="special" name="pricingcard[${index}][tipe]" placeholder="/Semester" @if ($pricingcard->tipe === 'special') checked @endif> centang jika anda ingin cardnya berwarna berbeda
                       </label>               
                     </div>

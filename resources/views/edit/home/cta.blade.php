@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login - Admin PMB SITISIPOL Raja Haji</title>
+    <title>Cta - Admin PMB SITISIPOL Raja Haji</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -70,7 +70,7 @@
                             <div class="card-body p-4 p-lg-5">
 
                                 <form action="{{ route('updateHomeCta') }}" method="post" class="php-email-form"
-                                    data-aos="fade-up" data-aos-delay="600">
+                                    data-aos="fade-up" data-aos-delay="600" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row gy-4">
 
@@ -89,13 +89,20 @@
                                                 placeholder="STISIPOL Raja Haji Tanjungpinang telah membuka pendaftaran." required="">{{ $ctas[1]->content }}</textarea>
                                         </div>
                                         <div class="col-12">
-                                            <p>Edit Cta Image</p>
-                                            <input type="file"
-                                                value="{{ asset('/assets/img/misc/' . $ctas[2]
-                                                ->content) }}"
-                                                class="form-control" name="img_{{ $ctas[2]->id }}_visual"
-                                                placeholder="CTA Image">
-                                        </div>
+    <p>Edit Cta Image</p>
+    <input type="hidden" name="img_cta_id" value="{{ $ctas[2]->id }}">
+
+    <!-- tampilkan gambar lama -->
+    <div class="mb-2">
+        <img src="{{ asset('/assets/img/cta/' . $ctas[2]->content) }}" 
+             alt="CTA Image" 
+             class="img-thumbnail" style="max-height: 150px;">
+    </div>
+
+    <!-- input file untuk upload baru -->
+    <input type="file" class="form-control" name="img_cta_visual" accept="image/*">
+</div>
+
 
                                         <div class="col-12 ">
                                             <p>Edit Cta List</p>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login - Admin PMB SITISIPOL Raja Haji</title>
+    <title>Stats - Admin PMB SITISIPOL Raja Haji</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -107,7 +107,7 @@
                                                     <input type="text" value="{{ $stat->label }}"
                                                         class="form-control" name="stats[{{ $loop->index }}][label]"
                                                         placeholder="label" required="">
-                                                    <button class="hapusStats btn btn-danger ">Hapus</button>
+                                                    <button class="hapusStats btn btn-danger " data-id="{{ $stat->id }}">Hapus</button>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -172,7 +172,7 @@
                     </div>
                     <div class="col-12 ">
                       <input type="text" class="form-control" name="stats[${index}][label]" placeholder="label" required="">
-                      <button class="hapusStats btn btn-danger ">Hapus</button>
+                      <button class="hapusStats btn btn-danger "data-id="{{ $stat->id }}">Hapus</button>
                     </div> 
                     </div> `;
             tambahanContainer.innerHTML += tambahanHTML;
@@ -188,11 +188,26 @@
             });
         });
         document.addEventListener("click", function(e) {
-            if (e.target.classList.contains("hapusStats")) {
-                e.preventDefault();
-                e.target.closest(".stat-item").remove();
-            }
-        });
+    if (e.target.classList.contains("hapusStats")) {
+        e.preventDefault();
+
+        // ambil id dari tombol
+        let id = e.target.getAttribute("data-id");
+
+        // kalau punya id (data lama dari DB) → kirim hidden input hapusStats[]
+        if (id) {
+            let hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "hapusStats[]";
+            hidden.value = id;
+            document.querySelector("form").appendChild(hidden);
+        }
+
+        // hapus tampilan stat dari DOM
+        e.target.closest(".stat-item").remove();
+    }
+});
+
     </script>
 
 </body>

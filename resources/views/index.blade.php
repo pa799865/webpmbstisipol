@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>PMB-STISIPOL Raja Haji</title>
+    <title>Home-STISIPOL Raja Haji</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -53,6 +53,7 @@
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#services">Fasilitas</a></li>
                     <li><a href="#pricing">Biaya Kuliah</a></li>
+                    <li><a href="#news">Berita</a></li>
 
                     <!-- Megamenu 2 -->
                     <li class="megamenu-2"><a href="#"><span>Lainnya</span> <i
@@ -64,30 +65,20 @@
                             <li class="dropdown"><a href="#"><span>Program Studi</span> <i
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
-                                    <li><a href="#">Konsentrasi</a></li>
-                                    <li><a href="#">Profil Lulusan</a></li>
-                                    <li><a href="#">Pilihan Kelas</a></li>
+                                    <li><a href="{{ route('konsentrasi') }}">Konsentrasi</a></li>
+                                    <li><a href="{{ route('profil-lulusan') }}">Profil Lulusan</a></li>
+                                    <li><a href="{{ route('pilihan-kelas') }}">Pilihan Kelas</a></li>
                                 </ul>
                             </li>
 
                             <li class="dropdown"><a href="#"><span>Pendaftaran</span> <i
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
-                                    <li><a href="#">Alur Pendaftaran</a></li>
-                                    <li><a href="#">Jalur Reguler</a></li>
-                                    <li><a href="#">Jalur Prestasi</a></li>
-                                    <li><a href="#">Jalur Kartu Indonesia Pintar</a></li>
-                                    <li><a href="#">Jalur Rekognisi Pembelajaran Lampau</a></li>
+                                    <li><a href="{{ route('alur-pendaftaran') }}">Alur Pendaftaran</a></li>
                                 </ul>
                             </li>
 
-                            <li class="dropdown"><a href="#"><span>Beasiswa</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Beasiswa Prestasi</a></li>
-                                    <li><a href="#">Beasiswa KIP</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{{ route('beasiswa') }}"><span>Beasiswa</span></a></li>
 
 
 
@@ -133,25 +124,25 @@
                                     <div class="content-grid">
                                         <div class="product-section">
                                             <div class="product-list">
-                                                <a href="#" class="product-link">
+                                                <a href="{{ route('konsentrasi') }}" class="product-link">
                                                     <i class="bi bi-bullseye"></i>
                                                     <div>
                                                         <span>Konsentrasi</span>
-                                                        <small>qwerty</small>
+                                                        <small></small>
                                                     </div>
                                                 </a>
-                                                <a href="#" class="product-link">
+                                                <a href="{{ route('profil-lulusan') }}" class="product-link">
                                                     <i class="bi bi-person-badge"></i>
                                                     <div>
                                                         <span>Profil Lulusan</span>
-                                                        <small>qwerty</small>
+                                                        <small></small>
                                                     </div>
                                                 </a>
-                                                <a href="#" class="product-link">
+                                                <a href="{{ route('pilihan-kelas') }}" class="product-link">
                                                     <i class="bi bi-card-list"></i>
                                                     <div>
                                                         <span>Pilihan Kelas</span>
-                                                        <small>qwerty</small>
+                                                        <small></small>
                                                     </div>
                                                 </a>
                                             </div>
@@ -165,44 +156,11 @@
                                     <div class="content-grid">
                                         <div class="product-section">
                                             <div class="product-list">
-                                                <a href="#" class="product-link">
+                                                <a href="{{ route('alur-pendaftaran') }}" class="product-link">
                                                     <i class="bi bi-diagram-3"></i>
                                                     <div>
                                                         <span>Alur Pendaftaran</span>
-                                                        <small>qwerty</small>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="product-link">
-                                                    <i class="bi bi-person-walking"></i>
-                                                    <div>
-                                                        <span>Jalur Reguler</span>
-                                                        <small>qwerty</small>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="product-link">
-                                                    <i class="bi bi-trophy"></i>
-                                                    <div>
-                                                        <span>Jalur Prestasi</span>
-                                                        <small>qwerty</small>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-section">
-                                            <div class="product-list">
-                                                <a href="#" class="product-link">
-                                                    <i class="bi bi-credit-card-2-front"></i>
-                                                    <div>
-                                                        <span>Jalur Kartu Indonesia Pintar</span>
-                                                        <small>qwerty</small>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="product-link">
-                                                    <i class="bi bi-journal-check"></i>
-                                                    <div>
-                                                        <span>Jalur Rekognisi Pembelajaran Lampau</span>
-                                                        <small>qwerty</small>
+                                                        <small></small>
                                                     </div>
                                                 </a>
                                             </div>
@@ -216,18 +174,11 @@
                                     <div class="content-grid">
                                         <div class="product-section">
                                             <div class="product-list">
-                                                <a href="#" class="product-link">
+                                                <a href="{{ route('beasiswa') }}" class="product-link">
                                                     <i class="bi bi-award"></i>
                                                     <div>
-                                                        <span>Beasiswa Prestasi</span>
-                                                        <small>qwerty</small>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="product-link">
-                                                    <i class="bi bi-card-checklist"></i>
-                                                    <div>
-                                                        <span>Beasiswa KIP</span>
-                                                        <small>qwerty</small>
+                                                        <span>Beasiswa</span>
+                                                        <small></small>
                                                     </div>
                                                 </a>
                                             </div>
@@ -240,10 +191,10 @@
 
                     </li><!-- End Megamenu 2 -->
 
-                    <li><a href="#contact">Download</a></li>
+                    <li><a href="{{ route('downloads') }}">Download</a></li>
 
                     <li>
-                        <a id="daftar" href="#" target="_blank" onmouseover="this.style.boxShadow='1px 1px 30px #023047';this.style.color='#fff';this.style.border='none';this.querySelector('span').style.visibility='visible';this.querySelector('span').style.transform='scale(100) translateX(2px)';"
+                        <a id="daftar" href="https://siakad2.stisipolrajahaji.ac.id/index.php?page=Pendaftaran" target="_blank" onmouseover="this.style.boxShadow='1px 1px 30px #023047';this.style.color='#fff';this.style.border='none';this.querySelector('span').style.visibility='visible';this.querySelector('span').style.transform='scale(100) translateX(2px)';"
                             onmouseout="this.style.boxShadow='none';this.style.color='#4e4e4e';this.style.border='2px solid #d5e5e5';this.querySelector('span').style.visibility='hidden';this.querySelector('span').style.transform='scale(1)';">
                             Daftar
                             <span></span>
@@ -268,11 +219,11 @@
 
                     <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right" data-aos-delay="200">
                         <div class="hero-content">
-                            <h1 class="hero-title" style="font-weight: 600;">{{ $heroes[0]->content }}</h1>
+                            <h1 class="hero-title" style="font-weight: 600; font-family:Arial; text-transform: uppercase;">{{ $heroes[0]->content }}</h1>
                             <p class="hero-description">{{ $heroes[1]->content }}</p>
                             <div class="hero-actions">
-                                <a href="#about" class="btn-primary">Daftar Sekarang</a>
-                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn-secondary glightbox">
+                                <a href="https://siakad2.stisipolrajahaji.ac.id/index.php?page=Pendaftaran" class="btn-primary">Daftar Sekarang</a>
+                                <a href="https://www.youtube.com/watch?v=8cq25CycYn8" class="btn-secondary glightbox">
                                     <i class="bi bi-play-circle"></i>
                                     <span>Tonton Kami</span>
                                 </a>
@@ -291,7 +242,7 @@
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="300">
                         <div class="hero-visual">
                             <div class="hero-image-wrapper">
-                                <img src="assets/img/illustration/illustration-15.webp" class="img-fluid hero-image"
+                                <img src="assets/img/illustration/illustrasion-18.JPG" class="img-fluid hero-image"
                                     alt="Hero Image">
                                 <div class="floating-elements">
                                     <div class="floating-card card-1">
@@ -336,10 +287,7 @@
                                 <span>{{ $services[2]->content }}</span>
                             </div>
                             <h2 class="section-heading mb-4">{{ $services[3]->content }}</h2>
-                            <p class="section-description mb-4">{{ $services[4]->content }}</p>
-                            <a href="#" class="btn-primary">
-                                Lebih lanjut
-                            </a>
+                            <p class="section-description mb-4" style="text-align: justify">{{ $services[4]->content }}</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -392,7 +340,7 @@
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-{{ $programstudyitem->tab }}">
                                 <div class="tab-icon">
-                                    <i class="bi bi-rocket-takeoff"></i>
+                                    <i class="bi bi-bank"></i>
                                 </div>
                                 <div class="tab-content">
                                     <h5>{{ $programstudyitem->title }}</h5>
@@ -411,7 +359,7 @@
                                 <div class="col-lg-5">
                                     <div class="content-wrapper">
                                         <div class="icon-badge">
-                                            <i class="bi bi-rocket-takeoff"></i>
+                                            <i class="bi bi-bank"></i>
                                         </div>
                                         <h3>{{ $programstudycontent->title }}</h3>
                                         <p>{{ $programstudycontent->description }}</p>
@@ -453,14 +401,55 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-7">
-                                    <div class="visual-content">
-                                        <div class="main-image">
-                                            <img src="assets/img/features/{{ $programstudycontent->img }}" alt="" class="img-fluid">
+                                  <div class="col-lg-7">
+                                    <div id="featureSlider{{ $programstudycontent->tab }}" class="carousel slide" data-bs-ride="carousel"
+                                        data-bs-interval="5000" data-bs-pause="hover">
+                                        <div class="carousel-indicators">
+                                            <button type="button" data-bs-target="#featureSlider{{ $programstudycontent->tab }}" data-bs-slide-to="0"
+                                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            <button type="button" data-bs-target="#featureSlider{{ $programstudycontent->tab }}" data-bs-slide-to="1"
+                                                aria-label="Slide 2"></button>
                                         </div>
+
+                                        <div class="carousel-inner rounded shadow-sm">
+                                            <div class="carousel-item active">
+                                                <img src="assets/img/features/{{ $programstudycontent->img }}"
+                                                    class="d-block w-100 img-fluid" alt="Foto 1"
+                                                    style="object-fit: cover; max-height: 450px;">
+                                                <div
+                                                    class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                                    <h5 class="text-white">Gambar 1</h5>
+   
+                                                </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                                <img src="assets/img/sertifikat/{{ $programstudycontent->img2 }}"
+                                                    class="d-block w-100 img-fluid" alt="Foto 2"
+                                                    style="object-fit: cover; max-height: 450px;">
+                                                <div
+                                                    class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                                    <h5 class="text-white">Gambar 2</h5>
+ 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#featureSlider{{ $programstudycontent->tab }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"
+                                                style="filter: drop-shadow(0 0 2px rgba(0,0,0,0.7));"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#featureSlider{{ $programstudycontent->tab }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"
+                                                style="filter: drop-shadow(0 0 2px rgba(0,0,0,0.7));"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
                                 </div>
-
                             </div>
                         </div><!-- End tab content item -->
                         @endforeach
@@ -525,45 +514,50 @@
 
                 <div class="row gy-4">
                     @foreach ($pricingcards as $pricingcard)
-                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
-                        <article class="price-card {{ $pricingcard->special }} h-100">
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                            <article class="price-card {{ $pricingcard->special }} h-100">
 
-                            <div class="card-head">
-                                <span class="badge-title{{ $pricingcard->special2 }}">Semester Genap</span>
-                                <h3 class="title{{ $pricingcard->special2 }}">Kelas Reguler</h3>
-                                <p class="subtitle{{ $pricingcard->special2 }}">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum.</p>
-                                <div class="price-wrap{{ $pricingcard->special2 }}">
-                                    <span class="price price-monthly"><sup>Rp</sup>3.353 <span>K</span>
-                                    @if ($pricingcard->special5 === 'special')
-                                        <span class="period"></span></span>
+                                <div class="card-head">
+                                    <span
+                                        class="badge-title{{ $pricingcard->special2 }}">{{ $pricingcard->badge }}</span>
+                                    <h3 class="title{{ $pricingcard->special2 }}">{{ $pricingcard->title }}</h3>
+                                    <p class="subtitle{{ $pricingcard->special2 }}">{{ $pricingcard->description }}
+                                    </p>
+                                    <div class="price-wrap{{ $pricingcard->special2 }}">
+                                        <span class="price price-monthly"><sup>Rp</sup>{{ $pricingcard->price }}
+                                            <span>K</span>
+                                            @if ($pricingcard->special5 === 'special')
+                                                <span class="period"></span>
+                                        </span>
                                     @else
                                         <span class="period">{{ $pricingcard->period }}</span></span>
-                                    @endif                          
-                                </div>
-                            </div>
-
-                            <ul class="feature-list list-unstyled mb-4">
-                                @if ($pricingcard->special5 === 'special')
-                                    @foreach ($listspecials as $listspecial)
-                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listspecial->content }}</li>
-                                @endforeach
-                                @else
-                                @foreach ($listbiasas as $listbiasa)
-                                    <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle" id="{{ $pricingcard->special4 }}"></i>{{ $listbiasa->content }}</li>
-                                @endforeach
-                                @endif
-                                
-                            </ul>
-
-                            <div class="cta">
-                                <a href="#" class="btn btn-choose{{ $pricingcard->special2 }} w-100">Daftar Sekarang</a>
-                            </div>
-                        </article><!-- End Pricing Item -->
-                    </div>
-                    @endforeach
-
+                    @endif
                 </div>
+            </div>
+
+            <ul class="feature-list list-unstyled mb-4">
+                @if ($pricingcard->special5 === 'special')
+                    @foreach ($listspecials as $listspecial)
+                        <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle"
+                                id="{{ $pricingcard->special4 }}"></i>{{ $listspecial->content }}</li>
+                    @endforeach
+                @else
+                    @foreach ($listbiasas as $listbiasa)
+                        <li id='{{ $pricingcard->special3 }}'><i class="bi bi-check-circle"
+                                id="{{ $pricingcard->special4 }}"></i>{{ $listbiasa->content }}</li>
+                    @endforeach
+                @endif
+
+            </ul>
+
+            <div class="cta">
+                <a href="#" class="btn btn-choose{{ $pricingcard->special2 }} w-100">Daftar Sekarang</a>
+            </div>
+            </article><!-- End Pricing Item -->
+            </div>
+            @endforeach
+
+            </div>
 
             </div>
 
@@ -577,7 +571,7 @@
                 <div class="row align-items-lg-center">
                     <div class="col-lg-5 order-lg-2" data-aos="fade-left" data-aos-delay="200">
                         <div class="image-wrapper position-relative">
-                            <img src="assets/img/misc/{{ $ctas[2]->content }}" alt="Security Solutions"
+                            <img src="assets/img/cta/{{ $ctas[2]->content }}" alt="Security Solutions"
                                 class="img-fluid main-image">
                         </div>
                     </div>
@@ -598,7 +592,7 @@
                             </ul>
 
                             <div class="cta-wrapper">
-                                <a href="#" class="btn btn-cta">Daftar</a>
+                                <a href="https://siakad2.stisipolrajahaji.ac.id/index.php?page=Pendaftaran" class="btn btn-cta">Daftar</a>
                             </div>
                         </div>
                     </div>
@@ -608,6 +602,72 @@
             </div>
 
         </section><!-- /Call To Action Section -->
+
+         <!-- Services Section -->
+            <section id="news" class="services section">
+                <div class="container text-center py-5">
+                    <h1 class="section-heading" data-aos="fade-up">Berita & Informasi Terkini</h1>
+                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Ikuti perkembangan terbaru dari
+                        STISIPOL
+                        Raja Haji Tanjungpinang.</p>
+                </div>
+
+                <section class="featured-news container mb-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="intro-content" data-aos="fade-right" data-aos-delay="200">
+                                <div class="section-badge mb-3" data-aos="zoom-in" data-aos-delay="50">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span>Berita Utama</span>
+                                </div>
+                                <h2 class="section-heading mb-3">{{ $berita[0]->judul }}
+                                </h2>
+                                <p class="section-description mb-4">
+                                    {{ $berita[0]->isi }}
+                                </p>
+                                <a href="{{ route('berita.index') }}" class="btn-primary">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="hero-visual" data-aos="fade-left" data-aos-delay="250">
+                                <img src="assets/img/berita/{{ $berita[0]->img }}" alt="Kampus STISIPOL Raja Haji"
+                                    class="img-fluid rounded-3 shadow">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-5">
+                    <div class="container">
+                        <h2 class="section-heading text-center mb-5" data-aos="fade-up">Berita Lainnya</h2>
+                        <div class="row gy-4">
+                            @foreach ($berita as $news)
+                                @if ($loop->iteration > 1 && $loop->iteration <= 4)
+                                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <div class="card h-100 border rounded-3 shadow-sm news-card">
+                                    <img src="assets/img/berita/{{ $news->img }}" class="card-img-top"
+                                        alt="Berita 1">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ $news->judul }}
+                                        </h5>
+                                        <p class="card-text text-muted small mb-2">{{ $news->created_at }}</p>
+                                        <p class="card-text">{{ $news->isi }}</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                                @endif
+                            @endforeach
+                            
+
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+            <!-- End News Section -->
 
         <!-- Faq Section -->
         <section id="faq" class="faq section">
@@ -653,10 +713,9 @@
                             dan berorientasi pada pengembangan ilmu serta pengabdian kepada masyarakat. Mari bertumbuh,
                             berinovasi, dan berkontribusi bersama kami untuk masa depan bangsa.</p>
                         <div class="social-links d-flex mt-4">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href="https://www.facebook.com/stisipolrajahaji.tanjungpinang.9" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.instagram.com/Stisipolrajahaji.official" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.youtube.com/@stisipolrajahajiofficial2342" target="_blank"><i class="bi bi-youtube"></i></a>
                         </div>
                     </div>
 
@@ -664,9 +723,9 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">Fasilitas</a></li>
-                            <li><a href="#">Biaya Kuliah</a></li>
-                            <li><a href="#">Download</a></li>
+                            <li><a href="#services">Fasilitas</a></li>
+                            <li><a href="#pricing">Biaya Kuliah</a></li>
+                            <li><a href="{{ route('downloads') }}">Download</a></li>
                         </ul>
                     </div>
 
@@ -675,7 +734,8 @@
                         <h4>Contact Us</h4>
                         <p>Jl. Raja Haji Fisabilillah No. 48, </p>
                         <p>Tanjungpinang, Kepulauan Riau</p>
-                        <p class="mt-4"><strong>Billy Jenawi:</strong> <span>081378582264</span></p>
+                        <p class="mt-4"><strong>Billy:</strong> <span>0813 7858 2264</span></p>
+                        <p><strong>Tyo:</strong> <span>0823 9193 5591</span></p>
                         <p><strong>Email:</strong> <span>pmb@stisipolrajahaji.ac.id</span></p>
                     </div>
 

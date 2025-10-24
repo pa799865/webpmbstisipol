@@ -92,10 +92,10 @@
                                             <button type="submit" class="btn btn-submit w-100">Masuk</button>
                                         </div>
 
-                                        <div class="col-12 text-center mt-3">
+                                        {{-- <div class="col-12 text-center mt-3">
                                             <a href="{{ route('register') }}"
                                                 class="btn btn-submit w-100">Buat akun baru</a>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </form>

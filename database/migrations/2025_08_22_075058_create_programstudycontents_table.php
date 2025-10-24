@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('list4')->nullable();
             $table->string('img');
             $table->timestamps();
+            $table->string('img2');
         });
     }
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login - Admin PMB SITISIPOL Raja Haji</title>
+    <title>Services - Admin PMB SITISIPOL Raja Haji</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -115,9 +115,10 @@
                                         </div>
                                         <div class="col-12 ">
                                             <p>Edit Services Visual</p>
+                                            <input type="hidden" name="img_services_id" value="{{ $services[5]->id }}">
                                             <input type="file"
                                                 value="{{ asset('/assets/img/services/' . $services[5]->content) }}"
-                                                class="form-control" name="img_{{ $services[5]->id }}_visual"
+                                                class="form-control" name="img_services_visual"
                                                 placeholder="Mahasiswa Aktif">
                                         </div>
                                         @foreach ($servicescards as $servicescard)

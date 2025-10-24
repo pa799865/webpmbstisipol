@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alurpendaftaran;
+use App\Models\Beasiswas;
 use App\Models\Cta;
+use App\Models\Download;
 use App\Models\Faq;
 use App\Models\Hero;
+use App\Models\Pilihankelas;
 use App\Models\Stats;
 use App\Models\Ctalist;
 use App\Models\Pricing;
 use App\Models\Services;
 use App\Models\Listbiasa;
 use App\Models\Statelemen;
+use App\Models\Konsentrasi;
 use App\Models\Listspecial;
 use App\Models\Pricingcard;
+use App\Models\Profillulusan;
 use App\Models\Servicescard;
 use Illuminate\Http\Request;
 use App\Models\Programstudyitem;
@@ -72,7 +78,7 @@ class KontenController extends Controller
     }
     public function statsShow(Stats $stats)
     {
-        return view('index', compact('stats'));
+        return view('edit.home.stats', compact('stats'));
     }
 
     public function updateHomeHero(Request $request)
@@ -87,7 +93,7 @@ class KontenController extends Controller
         $this->updateStats($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Tiket berhasil dibuat');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Hero berhasil diperbarui');
 }
 
 private function updateHeroes(Request $request)
@@ -142,11 +148,11 @@ public function updateHomeServices(Request $request)
         $this->updateServicesCards($request);
     }
 
-    if ($request->hasFile('img_6_visual')) {
+    if ($request->hasFile('img_services_visual')) {
         $this->updateServicesImg($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Tiket berhasil dibuat');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Services berhasil diperbarui');
 }
 
 private function updateServices(Request $request)
@@ -191,25 +197,22 @@ private function updateServicesCards(Request $request)
 
 private function updateServicesImg(Request $request)
 {
-    // misalnya kamu tahu id yang dipakai 5
-    $service = Services::find( $request->input('img_6_id', 6) ); // bisa juga hardcode kalau fix id=5
-    if ($service) {
-        if ($request->hasFile("img_{$service->id}_visual")) {
-            $file = $request->file("img_{$service->id}_visual");
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/img/services'), $filename);
+    $id = $request->input('img_services_id');
+    $service = Services::find($id);
 
-            // hapus file lama kalau ada
-            if ($service->content && file_exists(public_path('assets/img/services/' . $service->content))) {
-                unlink(public_path('assets/img/services/' . $service->content));
-            }
+    if ($service && $request->hasFile("img_services_visual")) {
+        $file = $request->file("img_services_visual");
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/img/services'), $filename);
 
-            $service->update([
-                'content' => $filename,
-            ]);
+        if ($service->content && file_exists(public_path('assets/img/services/' . $service->content))) {
+            unlink(public_path('assets/img/services/' . $service->content));
         }
+
+        $service->update(['content' => $filename]);
     }
 }
+
 
     public function updateHomeFeatures(Request $request)
 {
@@ -223,7 +226,7 @@ private function updateServicesImg(Request $request)
         $this->updateProgramstudyContent($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Tiket berhasil dibuat');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Features berhasil diperbarui');
 }
 
 private function updateProgramstudyItem(Request $request)
@@ -286,7 +289,7 @@ public function updateHomeStats(Request $request)
         $this->updateStatsCards($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Tiket berhasil dibuat');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Stats berhasil diperbarui');
 }
 
 private function updateStatsElement(Request $request)
@@ -301,33 +304,39 @@ private function updateStatsElement(Request $request)
 
 private function updateStatsCards(Request $request)
 {
-    $stats = $request->input('stats', []);
-
-    foreach ($stats as $statData) {
-        if (isset($statData['id'])) {
-            // update data lama
-            $stat = Stats::find($statData['id']);
-            if ($stat) {
-                $stat->update([
-                    'number' => $statData['number'],
-                    'label'  => $statData['label'],
-                ]);
-            }
-        } else {
-            // insert data baru
-            Stats::create([
-                'number' => $statData['number'],
-                'label'  => $statData['label'],
-            ]);
-        }
-    }
-    foreach ($request->input('deleteStats', []) as $id) {
+    // hapus dulu
+    foreach ($request->input('hapusStats', []) as $id) {
         $stat = Stats::find($id);
         if ($stat) {
             $stat->delete();
         }
     }
+
+    // kalau ada data stats baru / update → baru jalanin ini
+    if ($request->has('stats')) {
+        $stats = $request->input('stats', []);
+
+        foreach ($stats as $statData) {
+            if (isset($statData['id'])) {
+                // update data lama
+                $stat = Stats::find($statData['id']);
+                if ($stat) {
+                    $stat->update([
+                        'number' => $statData['number'],
+                        'label'  => $statData['label'] ,
+                    ]);
+                }
+            } else {
+                // insert data baru
+                Stats::create([
+                    'number' => $statData['number'],
+                    'label'  => $statData['label'],
+                ]);
+            }
+        }
+    }
 }
+
 
  public function updateHomePricing(Request $request)
 {
@@ -347,7 +356,7 @@ private function updateStatsCards(Request $request)
         $this->updateListSpecial($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Tiket berhasil dibuat');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Pricing berhasil diperbarui');
 }
 
 private function updatePricing(Request $request)
@@ -368,28 +377,66 @@ private function updatePricingCard(Request $request)
         if (isset($pricingcardData['id'])) {
             // update data lama
             $pricingCard = Pricingcard::find($pricingcardData['id']);
-            if ($pricingCard) {
-                if ($pricingcardData['tipe'] === null) {
-                    $pricingcardData['tipe'] = 'normal';
-                }
+            if (isset($pricingcardData['tipe'])) {
+                        $special = 'featured';
+                        $special2 = '-featured';
+                        $special3 = 'feature-li';
+                        $special4 = 'feature-i';
+                        $special5 = 'special';
+                        $tipe = 'special';
+                    } else {
+                        $special = null;
+                        $special2 = null;
+                        $special3 =null;
+                        $special4 =null;
+                        $special5 = null;
+                        $tipe = null;
+                    } 
+
                 $pricingCard->update([
                     'badge' => $pricingcardData['badge'],
                     'title'  => $pricingcardData['title'],
                     'description'  => $pricingcardData['description'],
                     'price'  => $pricingcardData['price'],
                     'period'  => $pricingcardData['period'],
-                    'tipe'  => $pricingcardData['tipe'],
+                    'special'  => $special,
+                    'special2'  => $special2,
+                    'special3'  => $special3,
+                    'special4'  => $special4,
+                    'special5'  => $special5,
+                    'special6'  => $special5,
+                    'tipe'  => $tipe,
                 ]);
-            }
         } else {
             // insert data baru
+            if (isset($pricingcardData['tipe'])) {
+                        $special = 'featured';
+                        $special2 = '-featured';
+                        $special3 = 'feature-li';
+                        $special4 = 'feature-i';
+                        $special5 = 'special';
+                        $tipe = 'special';
+                    } else {
+                        $special = null;
+                        $special2 = null;
+                        $special3 =null;
+                        $special4 =null;
+                        $special5 = null;
+                        $tipe = null;
+                    } 
             Pricingcard::create([
                'badge' => $pricingcardData['badge'],
                     'title'  => $pricingcardData['title'],
                     'description'  => $pricingcardData['description'],
                     'price'  => $pricingcardData['price'],
                     'period'  => $pricingcardData['period'],
-                    'tipe'  => $pricingcardData['tipe'],
+                    'special'  => $special,
+                    'special2'  => $special2,
+                    'special3'  => $special3,
+                    'special4'  => $special4,
+                    'special5'  => $special5,
+                    'special6'  => $special5,
+                    'tipe'  => $tipe,
             ]);
         }
     }
@@ -468,11 +515,11 @@ public function updateHomeCta(Request $request)
     }
 
     // update CTA image (cari field yg ada "img_*_visual")
-    if ($request->hasFile('img_3_visual')) {
+    if ($request->hasFile('img_cta_visual')) {
     $this->updateCtasImg($request);
 }
 
-    return redirect()->route('admin')->with('success', 'CTA berhasil diperbarui');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Cta berhasil diperbarui');
 }
 
 private function updateCtas(Request $request)
@@ -518,25 +565,28 @@ private function updateCtaList(Request $request)
 
 private function updateCtasImg(Request $request)
 {
-    // misalnya kamu tahu id yang dipakai 5
-    $cta = Cta::find( $request->input('img_3_id', 3)); // bisa juga hardcode kalau fix id=5
-    if ($cta) {
-        if ($request->hasFile("img_{$cta->id}_visual")) {
-            $file = $request->file("img_{$cta->id}_visual");
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/img/misc'), $filename);
+    $cta = Cta::find($request->input('img_cta_id'));
 
-            // hapus file lama kalau ada
-            if ($cta->content && file_exists(public_path('assets/img/misc/' . $cta->content))) {
-                unlink(public_path('assets/img/misc/' . $cta->content));
-            }
+    if ($cta && $request->hasFile('img_cta_visual')) {
+        $file = $request->file('img_cta_visual');
 
-            $cta->update([
-                'content' => $filename,
-            ]);
+        // nama file baru
+        $filename = uniqid() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/img/cta'), $filename);
+
+        // hapus file lama
+        $oldPath = public_path('assets/img/cta/' . $cta->content);
+        if ($cta->content && file_exists($oldPath)) {
+            unlink($oldPath);
         }
+
+        // update database dengan nama baru
+        $cta->update(['content' => $filename]);
     }
 }
+
+
+
 
 public function updateHomeFaqs(Request $request)
 {
@@ -555,7 +605,7 @@ public function updateHomeFaqs(Request $request)
         $this->updateFaqs($request);
     }
 
-    return redirect()->route('admin')->with('success', 'Konten berhasil diperbarui');
+    return redirect()->route('admin.index')->with('success', 'primary')->with('message', 'Konten Faqs berhasil diperbarui');
 }
 
 private function updateFaqs(Request $request)
@@ -590,5 +640,530 @@ private function updateFaqs(Request $request)
     }
 }
 
+public function showMegamenuKonsentrasiFormTambah()
+    {
+        return view('edit.megamenu.konsentrasi.tambahkonsentrasi');
+    }
 
+    
+public function tambahMegamenuKonsentrasi(Request $request)
+    {
+        $request->validate([
+            'img' => 'required|image|mimes:jpg,jpeg,png,webp',
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'akreditasi' => 'required',
+            'konsentrasi1' => 'required',
+        ]);
+
+if ($request->hasFile('img')) {
+    // Nama file unik
+    $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+
+    // Simpan langsung ke folder public/assets/img/konsentrasi
+    $request->file('img')->move(public_path('assets/img/konsentrasi'), $imgName);
+}
+
+
+        Konsentrasi::create([
+            'img' => $imgName,
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'akreditasi' => $request->akreditasi,
+            'konsentrasi1' => $request->konsentrasi1,
+            'konsentrasi2' => $request->konsentrasi2,
+            'konsentrasi3' => $request->konsentrasi3,
+            'konsentrasi4' => $request->konsentrasi4,
+            'konsentrasi5' => $request->konsentrasi5,
+            'background_card' => $request->has('tipe') ? 'darker' : 'light',
+            'background_akreditasi' => $request->has('tipe') ? '-light' : null,
+            'background_akreditasi2' => $request->has('tipe') ? 'text-accent' : null,
+        ]);
+
+        return redirect()->route('admin.konsentrasi')->with('success', 'primary')->with('message', 'Konten Konsentrasi berhasil diperbarui');
+        
+        
+    }
+
+    public function hapusMegamenuKonsentrasi($id)
+{
+    // Cari data berdasarkan ID
+    $konsentrasi = Konsentrasi::findOrFail($id);
+
+    // Cek apakah file gambar ada di folder public
+    $gambarPath = public_path('assets/img/konsentrasi/' . $konsentrasi->img);
+    if (file_exists($gambarPath)) {
+        unlink($gambarPath); // Hapus file fisik dari folder public
+    }
+
+    // Hapus data dari database
+    $konsentrasi->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.konsentrasi')->with('success', 'primary')->with('message', 'Konten Konsentrasi berhasil diperbarui');
+}
+
+public function showupdateMegamenuKonsentrasi($id)
+{
+    $konsentrasi = Konsentrasi::findOrFail($id);
+    return view('edit.megamenu.konsentrasi.updatekonsentrasi', compact('konsentrasi'));
+}
+
+public function updateMegamenuKonsentrasi(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required',
+        'deskripsi' => 'required',
+        'akreditasi' => 'required',
+        'konsentrasi1' => 'required',
+    ]);
+
+    $konsentrasi = Konsentrasi::findOrFail($id);
+
+    if ($request->hasFile('img')) {
+        // hapus file lama
+        $oldPath = public_path('assets/img/konsentrasi/' . $konsentrasi->img);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+
+        // upload baru
+        $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+        $request->file('img')->move(public_path('assets/img/konsentrasi'), $imgName);
+        $konsentrasi->img = $imgName;
+    }
+
+    // update field lain
+    $konsentrasi->update([
+        'judul' => $request->judul,
+        'deskripsi' => $request->deskripsi,
+        'akreditasi' => $request->akreditasi,
+        'konsentrasi1' => $request->konsentrasi1,
+        'konsentrasi2' => $request->konsentrasi2,
+        'konsentrasi3' => $request->konsentrasi3,
+        'konsentrasi4' => $request->konsentrasi4,
+        'konsentrasi5' => $request->konsentrasi5,
+        'background_card' => $request->has('tipe') ? 'darker' : 'light',
+        'background_akreditasi' => $request->has('tipe') ? '-light' : null,
+        'background_akreditasi2' => $request->has('tipe') ? 'text-accent' : null,
+    ]);
+
+    return redirect()->route('admin.konsentrasi')->with('success', 'primary')->with('message', 'Konten Konsentrasi berhasil diperbarui');
+}
+
+public function showMegamenuProfilLulusanFormTambah()
+    {
+        return view('edit.megamenu.profillulusan.tambahprofillulusan');
+    }
+
+public function tambahMegamenuProfilLulusan (Request $request)
+    {
+        $request->validate([
+            'img' => 'required|image|mimes:jpg,jpeg,png,webp',
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'list1' => 'required',
+        ]);
+
+if ($request->hasFile('img')) {
+    // Nama file unik
+    $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+
+    // Simpan langsung ke folder public/assets/img/konsentrasi
+    $request->file('img')->move(public_path('assets/img/lainnya/profil_lulusan'), $imgName);
+}
+
+
+        Profillulusan::create([
+            'img' => $imgName,
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'list1' => $request->list1,
+            'list2' => $request->list2,
+            'list3' => $request->list3,
+            'list4' => $request->list4,
+            'list5' => $request->list5,
+            'list6' => $request->list6,
+            'list7' => $request->list7,
+            'list8' => $request->list8,
+            'list9' => $request->list9,
+            'list10' => $request->list10,
+            'background' => $request->has('tipe') ? 'highlighted' : null,
+        ]);
+
+        return redirect()->route('admin.profil-lulusan')->with('success', 'primary')->with('message', 'Konten Profil Lulusan berhasil diperbarui');
+        
+        
+    }
+
+    public function showupdateMegamenuProfilLulusan($id)
+{
+    $profillulusan = Profillulusan::findOrFail($id);
+    return view('edit.megamenu.profillulusan.updateprofillulusan', compact('profillulusan'));
+}
+public function updateMegamenuProfilLulusan(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required',
+        'deskripsi' => 'required',
+        'list1' => 'required',
+    ]);
+
+    $profillulusan = Profillulusan::findOrFail($id);
+
+    if ($request->hasFile('img')) {
+        // hapus file lama
+        $oldPath = public_path('assets/img/lainnya/profil_lulusan' . $profillulusan->img);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+
+        // upload baru
+        $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+        $request->file('img')->move(public_path('assets/img/lainnya/profil_lulusan'), $imgName);
+        $profillulusan->img = $imgName;
+    }
+
+    // update field lain
+    $profillulusan->update([
+        'judul' => $request->judul,
+        'deskripsi' => $request->deskripsi,
+        'akreditasi' => $request->akreditasi,
+        'list1' => $request->list1,
+        'list2' => $request->list2,
+        'list3' => $request->list3,
+        'list4' => $request->list4,
+        'list5' => $request->list5,
+        'background' => $request->has('tipe') ? 'highlighted' : '',
+    ]);
+
+    return redirect()->route('admin.profil-lulusan')->with('success', 'primary')->with('message', 'Konten Profil Lulusan berhasil diperbarui');
+}
+public function hapusMegamenuProfilLulusan($id)
+{
+    // Cari data berdasarkan ID
+    $profillulusan = Profillulusan::findOrFail($id);
+
+    // Cek apakah file gambar ada di folder public
+    $gambarPath = public_path('assets/img/konsentrasi/' . $profillulusan->img);
+    if (file_exists($gambarPath)) {
+        unlink($gambarPath); // Hapus file fisik dari folder public
+    }
+
+    // Hapus data dari database
+    $profillulusan->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.profil-lulusan')->with('success', 'primary')->with('message', 'Konten Profil Lulusan berhasil diperbarui');
+}
+public function showMegamenuPilihanKelasFormTambah()
+    {
+        return view('edit.megamenu.pilihankelas.tambahpilihankelas');
+    }
+public function tambahMegamenuPilihanKelas (Request $request)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+
+        Pilihankelas::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->route('admin.pilihan-kelas')->with('success', 'primary')->with('message', 'Konten Pilihan kelas berhasil diperbarui');
+        
+        
+    }
+    public function showupdateMegamenuPilihanKelas($id)
+{
+    $pilihankelas = Pilihankelas::findOrFail($id);
+    return view('edit.megamenu.pilihankelas.updatepilihankelas', compact('pilihankelas'));
+}
+public function updateMegamenuPilihanKelas(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required',
+        'deskripsi' => 'required',
+    ]);
+
+    $pilihankelas = Pilihankelas::findOrFail($id);
+
+    // update field lain
+    $pilihankelas->update([
+        'judul' => $request->judul,
+        'deskripsi' => $request->deskripsi,
+    ]);
+
+    return redirect()->route('admin.pilihan-kelas')->with('success', 'primary')->with('message', 'Konten Pilihan Kelas berhasil diperbarui');
+}
+public function hapusMegamenuPilihanKelas($id)
+{
+    // Cari data berdasarkan ID
+    $pilihankelas = Pilihankelas::findOrFail($id);
+
+    // Hapus data dari database
+    $pilihankelas->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.pilihan-kelas')->with('success', 'primary')->with('message', 'Konten Pilihan Kelas berhasil diperbarui');
+}
+public function showMegamenuBeasiswaFormTambah()
+    {
+        return view('edit.megamenu.beasiswa.tambahbeasiswa');
+    }
+    public function tambahMegamenuBeasiswa (Request $request)
+    {
+        $request->validate([
+            'img' => 'required|image|mimes:jpg,jpeg,png,webp',
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'tombol' => 'required',
+        ]);
+
+if ($request->hasFile('img')) {
+    // Nama file unik
+    $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+
+    // Simpan langsung ke folder public/assets/img/konsentrasi
+    $request->file('img')->move(public_path('assets/img/beasiswa'), $imgName);
+}
+
+
+        Beasiswas::create([
+            'img' => $imgName,
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'tombol' => $request->tombol,
+        ]);
+
+        return redirect()->route('admin.beasiswa')->with('success', 'primary')->with('message', 'Konten Beasiswa berhasil diperbarui');
+        
+        
+    }
+    public function showupdateMegamenuBeasiswa($id)
+{
+    $beasiswa = Beasiswas::findOrFail($id);
+    return view('edit.megamenu.beasiswa.updatebeasiswa', compact('beasiswa'));
+}
+public function updateMegamenuBeasiswa(Request $request, $id)
+{
+    $request->validate([
+        'tombol' => 'required',
+        'judul' => 'required',
+        'deskripsi' => 'required',
+    ]);
+
+    $beasiswa = Beasiswas::findOrFail($id);
+
+    if ($request->hasFile('img')) {
+        // hapus file lama
+        $oldPath = public_path('assets/img/beasiswa' . $beasiswa->img);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+
+        // upload baru
+        $imgName = time() . '_' . $request->file('img')->getClientOriginalName();
+        $request->file('img')->move(public_path('assets/img/beasiswa'), $imgName);
+        $beasiswa->img = $imgName;
+    }
+
+    // update field lain
+    $beasiswa->update([
+        'tombol' => $request->tombol,
+        'judul' => $request->judul,
+        'deskripsi' => $request->deskripsi,
+    ]);
+
+    return redirect()->route('admin.beasiswa')->with('success', 'primary')->with('message', 'Konten Beasiswa berhasil diperbarui');
+}
+public function hapusMegamenuBeasiswa($id)
+{
+    // Cari data berdasarkan ID
+    $beasiswa = Beasiswas::findOrFail($id);
+
+    // Cek apakah file gambar ada di folder public
+    $gambarPath = public_path('assets/img/beasiswa/' . $beasiswa->img);
+    if (file_exists($gambarPath)) {
+        unlink($gambarPath); // Hapus file fisik dari folder public
+    }
+
+    // Hapus data dari database
+    $beasiswa->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.beasiswa')->with('success', 'primary')->with('message', 'Konten Beasiswa berhasil diperbarui');
+}
+public function showMegamenuAlurPendaftaranFormTambah()
+    {
+        return view('edit.megamenu.alurpendaftaran.tambahalurpendaftaran');
+    }
+    public function tambahMegamenuAlurPendaftaran (Request $request)
+    {
+        $request->validate([
+            'tahap' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+
+        Alurpendaftaran::create([
+            'tahap' => $request->tahap,
+            'deskripsi' => $request->deskripsi,
+            'background' => $request->has('tipe') ? 'break-card' : null,
+        ]);
+
+        return redirect()->route('admin.alur-pendaftaran')->with('success', 'primary')->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
+        
+        
+    }
+    public function showupdateMegamenuAlurPendaftaran($id)
+{
+    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+    return view('edit.megamenu.alurpendaftaran.updatealurpendaftaran', compact('alurpendaftaran'));
+}
+public function updateMegamenuAlurPendaftaran(Request $request, $id)
+{
+    $request->validate([
+        'tahap' => 'required',
+        'deskripsi' => 'required',
+    ]);
+
+    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+
+    // update field lain
+    $alurpendaftaran->update([
+        'tahap' => $request->tahap,
+        'deskripsi' => $request->deskripsi,
+        'background' => $request->has('tipe') ? 'break-card' : null,
+    ]);
+
+    return redirect()->route('admin.alur-pendaftaran')->with('success', 'primary')->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
+}
+public function hapusMegamenuAlurPendaftaran($id)
+{
+    // Cari data berdasarkan ID
+    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+
+    // Hapus data dari database
+    $alurpendaftaran->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.alur-pendaftaran')->with('success', 'primary')->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
+}
+public function showupdateMegamenuAlurPendaftaranGambar($id)
+{
+    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+    return view('edit.megamenu.alurpendaftaran.updatealurpendaftarangambar2', compact('alurpendaftaran'));
+}
+public function updateMegamenuAlurPendaftaranGambar(Request $request, $id)
+{
+    $request->validate([
+        'tahap' => 'required',
+    ]);
+
+    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+
+    if ($request->hasFile('tahap')) {
+        // hapus file lama
+        $oldPath = public_path('assets/img/lainnya/pendaftaran' . $alurpendaftaran->tahap);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+
+        // upload baru
+        $imgName = time() . '_' . $request->file('tahap')->getClientOriginalName();
+        $request->file('tahap')->move(public_path('assets/img/lainnya/pendaftaran'), $imgName);
+        $alurpendaftaran->tahap = $imgName;
+    }
+
+    return redirect()->route('admin.alur-pendaftaran')->with('success', 'primary')->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
+}
+
+public function showDownloadFormTambah()
+    {
+        return view('edit.download.tambahdownload');
+    }
+
+public function tambahDownload (Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpg,jpeg,png,webp',
+            'judul' => 'required',
+            'lihat' => 'required',
+        ]);
+
+if ($request->hasFile('file')) {
+    // Nama file unik
+    $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
+
+    // Simpan langsung ke folder public/assets/img/download
+    $request->file('file')->move(public_path('assets/sertifikat'), $fileName);
+}
+
+
+        Download::create([
+            'file' => $fileName,
+            'judul' => $request->judul,
+            'lihat' => $request->lihat,
+        ]);
+
+        return redirect()->route('admin.downloads')->with('success', 'primary')->with('message', 'Konten download berhasil diperbarui');
+        
+        
+    }
+    public function showupdateDownload($id)
+{
+    $download = Download::findOrFail($id);
+    return view('edit.download.updatedownload', compact('download'));
+}
+public function updateDownload(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required',
+        'lihat' => 'required',
+    ]);
+
+    $download = Download::findOrFail($id);
+
+    if ($request->hasFile('file')) {
+        // hapus file lama
+        $oldPath = public_path('assets/sertifikat' . $download->file);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+
+        // upload baru
+        $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
+        $request->file('file')->move(public_path('assets/sertifikat'), $fileName);
+        $download->file = $fileName;
+    }
+
+    // update field lain
+    $download->update([
+        'judul' => $request->judul,
+        'lihat' => $request->lihat,
+    ]);
+
+    return redirect()->route('admin.downloads')->with('success', 'primary')->with('message', 'Konten Download berhasil diperbarui');
+}
+public function hapusDownload($id)
+{
+    // Cari data berdasarkan ID
+    $download = Download::findOrFail($id);
+
+    // Cek apakah file gambar ada di folder public
+    $gambarPath = public_path('assets/sertifikat/' . $download->file);
+    if (file_exists($gambarPath)) {
+        unlink($gambarPath); // Hapus file fisik dari folder public
+    }
+
+    // Hapus data dari database
+    $download->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.downloads')->with('success', 'primary')->with('message', 'Konten Download berhasil diperbarui');
+}
 }

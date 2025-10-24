@@ -7,6 +7,7 @@ use App\Models\Faq;
 use App\Models\Hero;
 use App\Models\User;
 use App\Models\Stats;
+use App\Models\Berita;
 use App\Models\Ctalist;
 use App\Models\Pricing;
 use App\Models\Services;
@@ -20,13 +21,11 @@ use App\Models\Programstudyitem;
 use App\Models\Programstudycontent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User; 
 
 class AuthController extends Controller
 {
     public function showRegisterForm() {
-        $title = 'Register';
-        return view('auth.register', compact('title'));
+        return view('auth.register');
     }
     public function showLoginForm() {
         $title = 'Login';
@@ -48,13 +47,14 @@ class AuthController extends Controller
         $faqs = Faq::all(); 
         $programstudyitems = Programstudyitem::all();
         $programstudycontents = Programstudycontent::all();
-        return view('index', compact('stats', 'heroes', 'services', 'servicescards', 'statelemens', 'pricings', 'pricingcards', 'listbiasas', 'listspecials', 'ctas', 'ctalists', 'faqs', 'programstudyitems', 'programstudycontents'));
+        $berita = Berita::all();
+        return view('index', compact('stats', 'heroes', 'services', 'servicescards', 'statelemens', 'pricings', 'pricingcards', 'listbiasas', 'listspecials', 'ctas', 'ctalists', 'faqs', 'programstudyitems', 'programstudycontents', 'berita'));
     }
     public function login(Request $request) {
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('admin')->with('success','Login Berhasil!');
+            return redirect()->route('admin.index')->with('success','Login Berhasil!');
         }
         return back()->withErrors(['username' => 'Username atau Password']);
     }
@@ -69,12 +69,12 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         
-        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('admin.index')->with('success', 'Registrasi berhasil. Silakan login.');
     }
     public function logout(Request $request)  {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('success','Logout Berhasil!');
+        return redirect()->route('admin.index')->with('success','Logout Berhasil!');
     }
 }

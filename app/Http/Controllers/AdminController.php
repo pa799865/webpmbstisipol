@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\Cta;
 use App\Models\Faq;
 use App\Models\Hero;
@@ -39,6 +40,7 @@ class AdminController extends Controller
         $faqs = Faq::all(); 
         $programstudyitems = Programstudyitem::all();
         $programstudycontents = Programstudycontent::all();
-        return view('admin.dashboard', compact('stats', 'heroes', 'services', 'servicescards', 'statelemens', 'pricings', 'pricingcards', 'listbiasas', 'listspecials', 'ctas', 'ctalists', 'faqs', 'programstudyitems', 'programstudycontents'));
+        $berita = Berita::all();
+        return view('admin.dashboard', compact('stats', 'heroes', 'services', 'servicescards', 'statelemens', 'pricings', 'pricingcards', 'listbiasas', 'listspecials', 'ctas', 'ctalists', 'faqs', 'programstudyitems', 'programstudycontents', 'berita'));
     }
 }
