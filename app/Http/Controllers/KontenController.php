@@ -99,9 +99,23 @@ class KontenController extends Controller
 private function updateHeroes(Request $request)
 {
     foreach ($request->input('heroes', []) as $heroData) {
-        $hero = Hero::find($heroData['id']);
-        if ($hero && $hero->content !== $heroData['content']) {
-            $hero->update(['content' => $heroData['content']]);
+
+        if (isset($heroData['id'])) {
+
+            $hero = Hero::find($heroData['id']);
+
+            if ($hero) {
+                $hero->update([
+                    'content' => $heroData['content']
+                ]);
+            }
+
+        } else {
+
+            Hero::create([
+                'content' => $heroData['content']
+            ]);
+
         }
     }
 }
@@ -158,9 +172,23 @@ public function updateHomeServices(Request $request)
 private function updateServices(Request $request)
 {
     foreach ($request->input('services', []) as $servicesData) {
-        $service = Services::find($servicesData['id']);
-        if ($service && $service->content !== $servicesData['content']) {
-            $service->update(['content' => $servicesData['content']]);
+
+        if (isset($servicesData['id'])) {
+
+            $service = Services::find($servicesData['id']);
+
+            if ($service) {
+                $service->update([
+                    'content' => $servicesData['content']
+                ]);
+            }
+
+        } else {
+
+            Services::create([
+                'content' => $servicesData['content']
+            ]);
+
         }
     }
 }
@@ -232,12 +260,25 @@ private function updateServicesImg(Request $request)
 private function updateProgramstudyItem(Request $request)
 {
     foreach ($request->input('programstudyitem', []) as $programStudyItemData) {
-        $programStudyItem = Programstudyitem::find($programStudyItemData['id']);
-        if ($programStudyItem && $programStudyItem->title !== $programStudyItemData['title']) {
-            $programStudyItem->update(['title' => $programStudyItemData['title']]);
-        }
-        if ($programStudyItem && $programStudyItem->description !== $programStudyItemData['description']) {
-            $programStudyItem->update(['description' => $programStudyItemData['description']]);
+
+        if (isset($programStudyItemData['id'])) {
+
+            $programStudyItem = Programstudyitem::find($programStudyItemData['id']);
+
+            if ($programStudyItem) {
+                $programStudyItem->update([
+                    'title' => $programStudyItemData['title'],
+                    'description' => $programStudyItemData['description']
+                ]);
+            }
+
+        } else {
+
+            Programstudyitem::create([
+                'title' => $programStudyItemData['title'],
+                'description' => $programStudyItemData['description']
+            ]);
+
         }
     }
 }
@@ -245,34 +286,49 @@ private function updateProgramstudyItem(Request $request)
 private function updateProgramstudyContent(Request $request)
 {
     foreach ($request->input('programstudycontent', []) as $index => $programStudyContentData) {
-        $programStudyContent = Programstudycontent::find($programStudyContentData['id']);
-        
-        if (!$programStudyContent) continue;
 
-        // update teks
-        $programStudyContent->update([
-            'title' => $programStudyContentData['title'],
-            'description' => $programStudyContentData['description'],
-            'list1' => $programStudyContentData['list1'] ?? null,
-            'list2' => $programStudyContentData['list2'] ?? null,
-            'list3' => $programStudyContentData['list3'] ?? null,
-            'list4' => $programStudyContentData['list4'] ?? null,
-        ]);
+        if (isset($programStudyContentData['id'])) {
 
-        // update gambar kalau ada
-        if ($request->hasFile("programstudycontent.$index.img")) {
-            $file = $request->file("programstudycontent.$index.img");
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('assets/img/features'), $filename);
+            $programStudyContent = Programstudycontent::find($programStudyContentData['id']);
 
-            // hapus file lama
-            if ($programStudyContent->img && file_exists(public_path('assets/img/features/'.$programStudyContent->img))) {
-                unlink(public_path('assets/img/features/'.$programStudyContent->img));
+            if ($programStudyContent) {
+
+                $programStudyContent->update([
+                    'title' => $programStudyContentData['title'],
+                    'description' => $programStudyContentData['description'],
+                    'list1' => $programStudyContentData['list1'] ?? null,
+                    'list2' => $programStudyContentData['list2'] ?? null,
+                    'list3' => $programStudyContentData['list3'] ?? null,
+                    'list4' => $programStudyContentData['list4'] ?? null,
+                ]);
+
+                if ($request->hasFile("programstudycontent.$index.img")) {
+
+                    $file = $request->file("programstudycontent.$index.img");
+                    $filename = time().'_'.$file->getClientOriginalName();
+                    $file->move(public_path('assets/img/features'), $filename);
+
+                    if ($programStudyContent->img && file_exists(public_path('assets/img/features/'.$programStudyContent->img))) {
+                        unlink(public_path('assets/img/features/'.$programStudyContent->img));
+                    }
+
+                    $programStudyContent->update([
+                        'img' => $filename
+                    ]);
+                }
             }
 
-            $programStudyContent->update([
-                'img' => $filename,
+        } else {
+
+            Programstudycontent::create([
+                'title' => $programStudyContentData['title'],
+                'description' => $programStudyContentData['description'],
+                'list1' => $programStudyContentData['list1'] ?? null,
+                'list2' => $programStudyContentData['list2'] ?? null,
+                'list3' => $programStudyContentData['list3'] ?? null,
+                'list4' => $programStudyContentData['list4'] ?? null,
             ]);
+
         }
     }
 }
@@ -295,9 +351,23 @@ public function updateHomeStats(Request $request)
 private function updateStatsElement(Request $request)
 {
     foreach ($request->input('statelemens', []) as $statelemensData) {
-        $statelemens = Statelemen::find($statelemensData['id']);
-        if ($statelemens && $statelemens->content !== $statelemensData['content']) {
-            $statelemens->update(['content' => $statelemensData['content']]);
+
+        if (isset($statelemensData['id'])) {
+
+            $statelemens = Statelemen::find($statelemensData['id']);
+
+            if ($statelemens) {
+                $statelemens->update([
+                    'content' => $statelemensData['content']
+                ]);
+            }
+
+        } else {
+
+            Statelemen::create([
+                'content' => $statelemensData['content']
+            ]);
+
         }
     }
 }
@@ -362,9 +432,23 @@ private function updateStatsCards(Request $request)
 private function updatePricing(Request $request)
 {
     foreach ($request->input('pricings', []) as $pricingsData) {
-        $pricings = Pricing::find($pricingsData['id']);
-        if ($pricings && $pricings->content !== $pricingsData['content']) {
-            $pricings->update(['content' => $pricingsData['content']]);
+
+        if (isset($pricingsData['id'])) {
+
+            $pricings = Pricing::find($pricingsData['id']);
+
+            if ($pricings) {
+                $pricings->update([
+                    'content' => $pricingsData['content']
+                ]);
+            }
+
+        } else {
+
+            Pricing::create([
+                'content' => $pricingsData['content']
+            ]);
+
         }
     }
 }
@@ -525,9 +609,23 @@ public function updateHomeCta(Request $request)
 private function updateCtas(Request $request)
 {
     foreach ($request->input('ctas', []) as $ctasData) {
-        $cta = Cta::find($ctasData['id']);
-        if ($cta && $cta->content !== $ctasData['content']) {
-            $cta->update(['content' => $ctasData['content']]);
+
+        if (isset($ctasData['id'])) {
+
+            $cta = Cta::find($ctasData['id']);
+
+            if ($cta) {
+                $cta->update([
+                    'content' => $ctasData['content']
+                ]);
+            }
+
+        } else {
+
+            Cta::create([
+                'content' => $ctasData['content']
+            ]);
+
         }
     }
 }
