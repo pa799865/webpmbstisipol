@@ -231,7 +231,7 @@
             <section id="alur-image" class="alur-image section text-center mt-5 mb-5">
                 <div class="container" data-aos="fade-up">
                     <div class="alur-frame border rounded-4 shadow-lg p-3">
-                        <img src="../assets/img/lainnya/pendaftaran/Alur Pendaftaran Online.png"
+                        <img src="../assets/img/lainnya/pendaftaran/{{ $alurpendaftarans[0]->tahap ?? 'Alur Pendaftaran Online.png' }}"
                             alt="Alur Pendaftaran Online STISIPOL Raja Haji" class="img-fluid rounded-3"
                             style="max-width: 50%; height: auto;">
                     </div>

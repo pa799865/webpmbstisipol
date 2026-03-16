@@ -1156,28 +1156,45 @@ public function showupdateMegamenuAlurPendaftaranGambar($id)
     $alurpendaftaran = Alurpendaftaran::findOrFail($id);
     return view('edit.megamenu.alurpendaftaran.updatealurpendaftarangambar2', compact('alurpendaftaran'));
 }
-public function updateMegamenuAlurPendaftaranGambar(Request $request, $id)
+public function updateMegamenuAlurPendaftaranGambar(Request $request, $id = null)
 {
     $request->validate([
-        'tahap' => 'required',
+        'tahap' => 'required|image'
     ]);
 
-    $alurpendaftaran = Alurpendaftaran::findOrFail($id);
+    $alurpendaftaran = Alurpendaftaran::find($id);
+
+    if (!$alurpendaftaran) {
+        $alurpendaftaran = new Alurpendaftaran();
+    }
 
     if ($request->hasFile('tahap')) {
-        // hapus file lama
-        $oldPath = public_path('assets/img/lainnya/pendaftaran' . $alurpendaftaran->tahap);
-        if (file_exists($oldPath)) {
-            unlink($oldPath);
+
+        // hapus file lama kalau ada
+        if ($alurpendaftaran->tahap) {
+            $oldPath = public_path('assets/img/lainnya/pendaftaran/' . $alurpendaftaran->tahap);
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
         }
 
-        // upload baru
+        // upload gambar baru
         $imgName = time() . '_' . $request->file('tahap')->getClientOriginalName();
-        $request->file('tahap')->move(public_path('assets/img/lainnya/pendaftaran'), $imgName);
+
+        $request->file('tahap')->move(
+            public_path('assets/img/lainnya/pendaftaran'),
+            $imgName
+        );
+
         $alurpendaftaran->tahap = $imgName;
     }
 
-    return redirect()->route('admin.alur-pendaftaran')->with('success', 'primary')->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
+    $alurpendaftaran->save();
+
+    return redirect()
+        ->route('admin.alur-pendaftaran')
+        ->with('success', 'primary')
+        ->with('message', 'Konten Alur Pendaftaran berhasil diperbarui');
 }
 
 public function showDownloadFormTambah()
